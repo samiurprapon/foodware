@@ -4,18 +4,18 @@ Sample Repository for all work in Mobile and Wireless Application Development co
 
 ## Folder Structure
 
-|------ Assignments
+├── Assignments
 
-            []|------------- Assignment 1
+            []  ├── Assignment 1
 
-            []|------------- Assignment 2
+            []  ├── Assignment 2
 
-            []|------------- Assignment 3
+            []  ├── Assignment 3
 
-            []|------------- Assignment 4
+            []  ├── Assignment 4
 
-|------ Android Project
+├── Android Project
 
-            |------------- README.md
+                ├── README.md
 
-            |------------- Project Code
+                ├── Project Code
