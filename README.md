@@ -6,16 +6,14 @@ Sample Repository for all work in Mobile and Wireless Application Development co
 
 ├── Assignments
 
-            []  ├── Assignment 1
+        ├── Lab
 
-            []  ├── Assignment 2
+            ├── Lab 01 - Oct 29 2020 Thursday
 
-            []  ├── Assignment 3
-
-            []  ├── Assignment 4
+        ├── Theory
 
 ├── Android Project
 
-                ├── README.md
+        ├── README.md
 
-                ├── Project Code
+        ├── Project Code
