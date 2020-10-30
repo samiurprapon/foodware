@@ -45,8 +45,8 @@ captures/
 .idea/dictionaries
 .idea/libraries
 
-Assignments/Lab/Lab 01 - Oct 29 2020 Thursday/SimpleAppWithToastMessage/.idea/shelf/
-Assignments/Lab/Lab 01 - Oct 29 2020 Thursday/SimpleAppWithToastMessage/.idea/workspace.xml
+.idea/shelf/
+.idea/workspace.xml
 # Android Studio 3 in .gitignore file.
 .idea/caches
 .idea/modules.xml
