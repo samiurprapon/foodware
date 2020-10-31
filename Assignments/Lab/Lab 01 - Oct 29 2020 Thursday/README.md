@@ -3,7 +3,7 @@
 Project : Coding Challenge
 
 > Phone Screenshot
->![screenshot](Screenshot_phone.png)
+>[<img src="Screenshot_phone.png" width="250"/>](Screenshot_phone.png)
 
 > Log Screenshot
 
