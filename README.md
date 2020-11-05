@@ -10,6 +10,8 @@ Sample Repository for all work in Mobile and Wireless Application Development co
 
             ├── Lab 01 - Oct 29 2020 Thursday
 
+            ├── Lab 02 - Nov 05 2020 Thursday
+
         ├── Theory
 
 ├── Android Project
