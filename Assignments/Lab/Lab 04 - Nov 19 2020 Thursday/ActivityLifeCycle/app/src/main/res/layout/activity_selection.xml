@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectionActivity">
+
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/_choose_your_item"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <Button
+        android:id="@+id/btn_cheese"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_cheese"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".16"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_header"
+        app:layout_constraintVertical_bias="0.04"
+        app:layout_constraintWidth_percent="0.27" />
+
+    <Button
+        android:id="@+id/btn_rice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_rice"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_cheese"
+        app:layout_constraintEnd_toStartOf="@+id/btn_apple"
+        app:layout_constraintHeight_percent=".16"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toEndOf="@+id/btn_cheese"
+        app:layout_constraintTop_toTopOf="@+id/btn_cheese"
+        app:layout_constraintWidth_percent="0.27" />
+
+    <Button
+        android:id="@+id/btn_apple"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_apple"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_rice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".16"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_rice"
+        app:layout_constraintWidth_percent="0.27" />
+
+
+    <Button
+        android:id="@+id/btn_pickles"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_pickles"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".16"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_cheese"
+        app:layout_constraintVertical_bias="0.120000005"
+        app:layout_constraintWidth_percent="0.27" />
+
+    <Button
+        android:id="@+id/btn_milk"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_milk"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_pickles"
+        app:layout_constraintEnd_toStartOf="@+id/btn_apple"
+        app:layout_constraintHeight_percent=".16"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toEndOf="@+id/btn_pickles"
+        app:layout_constraintTop_toTopOf="@+id/btn_pickles"
+        app:layout_constraintWidth_percent="0.27" />
+
+    <Button
+        android:id="@+id/btn_mango"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_mango"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_milk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".16"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_milk"
+        app:layout_constraintWidth_percent="0.27" />
+</androidx.constraintlayout.widget.ConstraintLayout>

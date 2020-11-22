@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ActivityLifeCycle</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="_cheese">Cheese</string>
+    <string name="_rice">Rice</string>
+    <string name="_apple">Apple</string>
+    <string name="_pickles">Pickles</string>
+    <string name="_milk">Milk</string>
+    <string name="_mango">Mango</string>
+    <string name="_choose_your_item">Choose your item</string>
+</resources>
