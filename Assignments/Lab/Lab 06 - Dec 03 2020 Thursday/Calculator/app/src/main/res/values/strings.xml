@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Calculator</string>
+
+    <string name="hint_number_one">number 1</string>
+    <string name="hint_number_two">number 2</string>
+    <string name="button_text_add">+</string>
+    <string name="button_text_sub">-</string>
+    <string name="button_text_div">/</string>
+    <string name="button_text_mul">X</string>
+    <string name="button_text_equal">=</string>
+    <string name="button_text_ac">ac</string>
+    <string name="button_text_pow">pow</string>
+
+    <string name="computationError">Error</string>
+    <string name="blank">Blank field(s)</string>
+    <string name="power">Power</string>
+    <string name="initial_result">0.00</string>
+</resources>
