@@ -1,1 +1,13 @@
-# Android Project
+# Foodware 
+
+In Dhaka and other Cities/towns in Bangladesh - food catering for office goers and events are a big issue. For health concerns, more and more people prefer lunch meals and event catering from home chefs. 
+
+This business need has given rise to many solutions like FoodTong (https://foodtong.co/) , which provides a digital service to connect home chefs with different customers, and use a foodpanda/grubhub like service for home-cooked meals. 
+
+Your objective is to develop one single food ordering platform app that serves both chefs and the customers. Customer and chefs/vendor will be able to login from the same app (as different users). 
+
+A chef can register as a home-cooked meal vendor, giving his venture a business name - set/update his food offerings; update which meals are going to be offered on which dates. Usually for a home-cooked meal delivery service, the chef decides the night before on what’s going to be available the next day. He or she can set the next day’s availability for an existing item, use the existing item to create a variant for the next day (and it will be stored in the local database as a variation), or offer an entirely new item for the next day (which will also be stored in the database). For each item - a picture is a must. Along with description, items, price, possible discount, coupons etc. For each chef - a location is must, so that customers can look at the nearest vendors first. 
+
+For a customer, he or she should be able to see all vendors, and filter them according to item general categories (Meat, Veg) or Specific Categories (Polaw, Biryani) etc. Vendors are typically sorted by the distance from the customer. Customers can order from one or multiple chefs. Customers should also be able to set a monthly meal plan or order catering from the application. 
+
+Assume payment is through BKash. When you order, you will enter a 10 digit unique Alphanumerical code (Say 7JQ4GDLLXU) as your BKash payment confirmation code. Traditionally, this code is generated when you transfer BKash money to a particular number. In the order screen, when you have finalized your payment - and clicked on Order now - a screen will appear where you have to enter this alphanumeric code, and instructions to BKash the money to a number. After you have transferred money to this number using Bkash (you dont have to integrate BKash APIs), the 10 digit unique Alphanumerical code (Say 7JQ4GDLLXU) will be generated. You will enter the alphanumeric code as a confirmation for your payment instructions. Your platform will keep 7% of your payment as processing fee, and wire the rest of the money to the food vendors. 
