@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Foodware</string>
+
+    <!--    All image description   -->
+    <string name="splash_screen_logo_description">Logo will be replaced by original one</string>
+
 </resources>
