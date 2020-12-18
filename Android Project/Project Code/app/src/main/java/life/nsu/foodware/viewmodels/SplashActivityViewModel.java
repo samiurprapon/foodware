@@ -2,6 +2,7 @@ package life.nsu.foodware.viewmodels;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import life.nsu.foodware.utils.UserConfirmation;
+import life.nsu.foodware.views.AuthenticationActivity;
 
 public class SplashActivityViewModel extends AndroidViewModel implements UserConfirmation {
 
@@ -33,7 +35,7 @@ public class SplashActivityViewModel extends AndroidViewModel implements UserCon
     public MutableLiveData<String> userType() {
         // Three types of user
         // 1. customer, 2. vendor, 3. rider
-        MutableLiveData<String> user = new MutableLiveData<String>("customer");
+        MutableLiveData<String> user = new MutableLiveData<String>("none");
 
         return user;
     }
@@ -56,6 +58,9 @@ public class SplashActivityViewModel extends AndroidViewModel implements UserCon
             default:
                 //TODO
                 // redirect to authentication page
+                Intent intent = new Intent(getApplication().getApplicationContext(), AuthenticationActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(intent);
 
         }
     }

@@ -19,6 +19,8 @@ public class SplashActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(SplashActivityViewModel.class);
 
+        // by pass to authentication process development
+        viewModel.activitySwitch("none");
 
     }
 
