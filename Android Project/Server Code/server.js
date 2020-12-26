@@ -9,6 +9,8 @@ const config = require('./config/secrets.json');
 
 // routes
 const authRoutes = require('./routes/authRoutes');
+const restaurantRoutes = require('./routes/restaurantRoutes');
+const vendorRoutes = require('./routes/vendorRoutes');
 
 const server = express();
 const port = process.env.PORT || config.PORT;
@@ -19,6 +21,8 @@ server.use(cors());
 
 // routing
 server.use('/api/auth', authRoutes.router);
+server.use('/api/vendor', vendorRoutes.router);
+server.use('/api/restaurant', restaurantRoutes.router);
 
 Sequelize.sync({
     force: false
