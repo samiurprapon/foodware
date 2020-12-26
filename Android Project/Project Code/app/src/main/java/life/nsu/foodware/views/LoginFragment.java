@@ -1,11 +1,13 @@
 package life.nsu.foodware.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import life.nsu.foodware.R;
+import life.nsu.foodware.views.vendor.VendorHomeActivity;
 
 
 public class LoginFragment extends Fragment {
@@ -59,6 +64,7 @@ public class LoginFragment extends Fragment {
                 // Call /api/auth/login
                 // store refresh token, access token, user type inside SharedPreference
                 // intent to rider/customer/vendor Home Activity
+                activitySwitch("vendor");
             }
         });
 
@@ -76,5 +82,34 @@ public class LoginFragment extends Fragment {
         String password = mPassword.getText().toString();
 
         return !mEmail.getText().toString().isEmpty() && password.length() >= 6;
+    }
+
+    private void activitySwitch(String type) {
+        Intent intent = null;
+
+        if(Objects.equals(type, "customer")) {
+            //TODO
+            // clear tasks
+            // redirect to @CustomerHomeActivity
+            // if user is new
+            // redirect to @CustomerCreateProfileFragment
+        } else if(Objects.equals(type, "rider")) {
+            //TODO
+            // clear tasks
+            // redirect to @RiderHomeActivity
+            // if user is new
+            // redirect to @RiderCreateProfileFragment
+        } else if(Objects.equals(type, "vendor")) {
+            intent = new Intent(getContext(), VendorHomeActivity.class);
+
+            //TODO
+            // if user is new
+            // redirect to @VendorCreateProfileFragment
+        }
+
+        if(intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            getActivity().startActivity(intent);
+        }
     }
 }
