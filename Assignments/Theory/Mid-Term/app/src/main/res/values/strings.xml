@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Private Messenger</string>
+    <string name="phone_number">phone Number</string>
+    <string name="write_your_text_here">write your text here..</string>
+    <string name="secret_key">secret key</string>
+    <string name="send">Send</string>
+
+    <string name="decryption">Decryption</string>
+    <string name="encryption">Encryption</string>
+
+
+    <string name="tile_cyphered_message">Cyphered Message</string>
+    <string name="encrypt">encrypt</string>
+    <string name="decrypt">decrypt</string>
+
+</resources>

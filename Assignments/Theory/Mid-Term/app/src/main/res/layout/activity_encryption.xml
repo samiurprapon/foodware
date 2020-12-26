@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".EncryptionActivity">
+
+    <TextView
+        android:id="@+id/tv_encryption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/encryption"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/et_phone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_phone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_decryption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/decryption"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:selectableItemBackground"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/et_phone"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/et_phone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/rectangle"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/phone_number"
+        android:maxLength="11"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:padding="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_encryption"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <EditText
+        android:id="@+id/et_message_body"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rectangle"
+        android:maxLength="147"
+        android:gravity="top"
+        android:hint="@string/write_your_text_here"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:scrollbars="horizontal"
+        android:maxLines="10"
+        android:minLines="6"
+        android:padding="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_encrypt"
+        app:layout_constraintEnd_toEndOf="@+id/et_secret"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_secret"
+        app:layout_constraintTop_toBottomOf="@+id/et_secret" />
+
+    <EditText
+        android:id="@+id/et_secret"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/rectangle"
+        android:maxLength="3"
+        android:gravity="top"
+        android:hint="@string/secret_key"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:nestedScrollingEnabled="true"
+        android:padding="16sp"
+        android:singleLine="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_phone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_phone"
+        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+
+    <Button
+        android:id="@+id/btn_encrypt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/selector_rectangle"
+        android:text="@string/encrypt"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_message_body"
+        app:layout_constraintStart_toStartOf="@+id/et_message_body"
+        app:layout_constraintTop_toBottomOf="@+id/et_message_body" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
