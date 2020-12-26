@@ -13,6 +13,7 @@ const vendorRoutes = require('./routes/vendorRoutes');
 const restaurantRoutes = require('./routes/restaurantRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const offeringRoutes = require('./routes/offeringRoutes');
+const customerRoutes = require('./routes/customerRoutes');
 
 const server = express();
 const port = process.env.PORT || config.PORT;
@@ -23,10 +24,13 @@ server.use(cors());
 
 // routing
 server.use('/api/auth', authRoutes.router);
+
 server.use('/api/vendor', vendorRoutes.router);
 server.use('/api/restaurant', restaurantRoutes.router);
 server.use('/api/restaurant/item', itemRoutes.router);
 server.use('/api/restaurant/offering', offeringRoutes.router);
+
+server.use('/api/customer', customerRoutes.router);
 
 Sequelize.sync({
     force: true
