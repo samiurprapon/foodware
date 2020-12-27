@@ -245,7 +245,6 @@
             android:importantForAutofill="no"
             tools:ignore="LabelFor" />
 
-
         <TextView
             android:id="@+id/tv_location_title"
             android:layout_width="wrap_content"
@@ -253,7 +252,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
-            android:text="Restaurant Location"
+            android:text="@string/title_restaurant_location"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
