@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    android:background="@color/background"
+    android:fitsSystemWindows="true"
     tools:context=".views.vendor.VendorHomeActivity">
 
     <!-- This LinearLayout represents the contents of the screen  -->
@@ -15,10 +15,18 @@
         android:orientation="vertical">
 
         <!-- The ActionBar displayed at the top -->
-        <include
-            layout="@layout/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:elevation="0dp">
+
+            <include
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <!-- The main content view where fragments are loaded -->
         <FrameLayout

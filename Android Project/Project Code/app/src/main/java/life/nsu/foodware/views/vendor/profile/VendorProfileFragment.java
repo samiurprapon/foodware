@@ -1,4 +1,4 @@
-package life.nsu.foodware.views.vendor;
+package life.nsu.foodware.views.vendor.profile;
 
 import android.os.Bundle;
 
@@ -12,28 +12,17 @@ import android.view.ViewGroup;
 
 import life.nsu.foodware.R;
 
+public class VendorProfileFragment extends Fragment {
 
-public class HomeFragment extends Fragment {
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public static VendorProfileFragment newInstance() {
+        return new VendorProfileFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_vendor_profile, container, false);
     }
 
     @Override

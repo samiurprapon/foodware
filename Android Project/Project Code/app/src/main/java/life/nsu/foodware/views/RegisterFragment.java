@@ -41,8 +41,8 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mEmail = view.findViewById(R.id.et_restaurant_name);
-        mPassword = view.findViewById(R.id.et_owner_phone_number);
+        mEmail = view.findViewById(R.id.tv_restaurant_name);
+        mPassword = view.findViewById(R.id.tv_owner_phone_number);
         mConfirmPassword = view.findViewById(R.id.et_confirm_password);
 
         mType = view.findViewById(R.id.radioGroup);
@@ -58,7 +58,7 @@ public class RegisterFragment extends Fragment {
                 String password = mPassword.getText().toString();
                 String confirmPassword = mConfirmPassword.getText().toString();
 
-                if(!validation(email, password, confirmPassword)) {
+                if (!validation(email, password, confirmPassword)) {
                     return;
                 }
 
@@ -100,13 +100,13 @@ public class RegisterFragment extends Fragment {
     }
 
     private boolean validation(String email, String password, String confirmPassword) {
-        if(type.equals("null")) {
+        if (type.equals("null")) {
             mSignUp.setError("Select type");
 
             return false;
         }
 
-        if(!password.equals(confirmPassword)) {
+        if (!password.equals(confirmPassword)) {
             mConfirmPassword.setError("Not matched.");
             return false;
         }

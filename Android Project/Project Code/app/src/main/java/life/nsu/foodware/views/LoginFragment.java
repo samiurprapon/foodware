@@ -46,8 +46,8 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mEmail = view.findViewById(R.id.et_restaurant_name);
-        mPassword = view.findViewById(R.id.et_owner_phone_number);
+        mEmail = view.findViewById(R.id.tv_restaurant_name);
+        mPassword = view.findViewById(R.id.tv_owner_phone_number);
 
         mForgetPassword = view.findViewById(R.id.tv_forget_password);
         mLogin = view.findViewById(R.id.btn_login);
@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validation()) {
+                if (validation()) {
                     mPassword.setError("wrong password.");
                 }
 
@@ -86,19 +86,19 @@ public class LoginFragment extends Fragment {
     private void activitySwitch(String type) {
         Intent intent = null;
 
-        if(Objects.equals(type, "customer")) {
+        if (Objects.equals(type, "customer")) {
             //TODO
             // clear tasks
             // redirect to @CustomerHomeActivity
             // if user is new
             // redirect to @CustomerCreateProfileFragment
-        } else if(Objects.equals(type, "rider")) {
+        } else if (Objects.equals(type, "rider")) {
             //TODO
             // clear tasks
             // redirect to @RiderHomeActivity
             // if user is new
             // redirect to @RiderCreateProfileFragment
-        } else if(Objects.equals(type, "vendor")) {
+        } else if (Objects.equals(type, "vendor")) {
             intent = new Intent(getContext(), VendorHomeActivity.class);
 
             //TODO
@@ -106,7 +106,7 @@ public class LoginFragment extends Fragment {
             // redirect to @VendorCreateProfileFragment
         }
 
-        if(intent != null) {
+        if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             getActivity().startActivity(intent);
         }

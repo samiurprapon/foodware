@@ -1,8 +1,6 @@
 package life.nsu.foodware.views.vendor;
 
 import android.content.res.Configuration;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -21,15 +18,15 @@ import com.google.android.material.navigation.NavigationView;
 import org.jetbrains.annotations.NotNull;
 
 import life.nsu.foodware.R;
+import life.nsu.foodware.views.vendor.profile.VendorProfileFragment;
 
-public class VendorHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+public class VendorHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager;
     private NavigationView navigationView;
     private DrawerLayout mDrawer;
+    Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,50 +34,44 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         setContentView(R.layout.activity_vendor_home);
 
         toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
 
-        Drawable upArrow = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_hamburger, null);
-        upArrow.setColorFilter(ResourcesCompat.getColor(getResources(), R.color.black, null), PorterDuff.Mode.SRC_ATOP);
+        // Find our drawer view
+        navigationView = findViewById(R.id.navigation_view);
+        mDrawer = findViewById(R.id.drawer_layout);
 
+        // Setup toggle to display hamburger icon with nice animation
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerToggle.setDrawerIndicatorEnabled(false);
+        drawerToggle.setDrawerSlideAnimationEnabled(true);
+
+        // custom hamburger button
+        toolbar.setNavigationIcon(R.drawable.ic_hamburger);
+
+        // Tie DrawerLayout events to the ActionBarToggle
+        mDrawer.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_hamburger);
         getSupportActionBar().show();
 
-        // Find our drawer view
-        navigationView = findViewById(R.id.navigation_view);
-
-        mDrawer = findViewById(R.id.drawer_layout);
-        drawerToggle = setupDrawerToggle();
-
-        // Setup toggle to display hamburger icon with nice animation
-        drawerToggle.setDrawerIndicatorEnabled(true);
-
-        // Tie DrawerLayout events to the ActionBarToggle
-        mDrawer.addDrawerListener(drawerToggle);
 
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, new HomeFragment())
+                .replace(R.id.content_frame, VendorHomeFragment.newInstance())
                 .commit();
-    }
 
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.action_bar, menu);
-//        return true;
-//    }
+        navigationView.getHeaderView(0).setOnClickListener(view -> {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, VendorProfileFragment.newInstance())
+                    .commit();
 
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
-        // and will not render the hamburger icon without it.
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-        actionBarDrawerToggle.setDrawerSlideAnimationEnabled(true);
-
-        return actionBarDrawerToggle;
+            mDrawer.closeDrawer(GravityCompat.START);
+        });
     }
 
     @Override
@@ -121,7 +112,7 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
 
         switch (menuItem.getItemId()) {
             case R.id.home:
-                fragment = HomeFragment.newInstance();
+                fragment = VendorHomeFragment.newInstance();
                 break;
             case R.id.menu:
                 fragment = MenuItemsFragment.newInstance();
@@ -132,8 +123,11 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
             case R.id.transactions:
                 fragment = TransactionsFragment.newInstance();
                 break;
+            case R.id.row_container:
+                fragment = VendorProfileFragment.newInstance();
+                break;
             default:
-                fragment = new HomeFragment();
+                fragment = new VendorHomeFragment();
                 break;
         }
 

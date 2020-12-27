@@ -64,13 +64,13 @@
             android:text="@string/title_restaurant_name"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_restaurant_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_restaurant_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <EditText
-            android:id="@+id/et_restaurant_name"
+            android:id="@+id/tv_restaurant_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -94,13 +94,13 @@
             android:text="@string/title_owner_name"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_owner_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_owner_name"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_owner_name"
-            app:layout_constraintTop_toBottomOf="@+id/et_restaurant_name" />
+            app:layout_constraintStart_toStartOf="@+id/tv_owner_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_name" />
 
         <EditText
-            android:id="@+id/et_owner_name"
+            android:id="@+id/tv_owner_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -124,13 +124,13 @@
             android:text="@string/title_owner_phone"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_restaurant_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_restaurant_name"
-            app:layout_constraintTop_toBottomOf="@+id/et_owner_name" />
+            app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_owner_name" />
 
         <EditText
-            android:id="@+id/et_owner_phone_number"
+            android:id="@+id/tv_owner_phone_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -140,7 +140,7 @@
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_owner_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_owner_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone"
             app:layout_constraintWidth_percent=".35"
             android:importantForAutofill="no"
@@ -155,13 +155,13 @@
             android:text="@string/title_bkash_number"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_owner_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_owner_name"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_tv_bkash_number"
+            app:layout_constraintStart_toStartOf="@+id/tv_bkash_number"
             app:layout_constraintTop_toTopOf="@+id/tv_owner_phone" />
 
         <EditText
-            android:id="@+id/et_tv_bkash_number"
+            android:id="@+id/tv_bkash_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -169,9 +169,9 @@
             android:inputType="phone"
             android:textColor="@color/black"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_owner_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_owner_name"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/et_owner_phone_number"
+            app:layout_constraintStart_toEndOf="@+id/tv_owner_phone_number"
             app:layout_constraintTop_toBottomOf="@+id/tv_bkash_number_title"
             app:layout_constraintWidth_percent=".35"
             android:importantForAutofill="no"
@@ -187,13 +187,13 @@
             android:text="@string/title_opening_at"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_tv_bkash_number"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bkash_number"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_owner_phone_number"
-            app:layout_constraintTop_toBottomOf="@+id/et_owner_phone_number" />
+            app:layout_constraintStart_toStartOf="@+id/tv_owner_phone_number"
+            app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone_number" />
 
         <EditText
-            android:id="@+id/et_opening"
+            android:id="@+id/tv_opening"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -204,9 +204,9 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_tv_bkash_number"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bkash_number"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_owner_phone_number"
+            app:layout_constraintStart_toStartOf="@+id/tv_owner_phone_number"
             app:layout_constraintTop_toBottomOf="@+id/tv_opening_title"
             android:importantForAutofill="no"
             tools:ignore="LabelFor" />
@@ -221,13 +221,13 @@
             android:text="@string/title_closing_at"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_tv_bkash_number"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bkash_number"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_closing"
-            app:layout_constraintTop_toBottomOf="@+id/et_owner_phone_number" />
+            app:layout_constraintStart_toStartOf="@+id/tv_closing"
+            app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone_number" />
 
         <EditText
-            android:id="@+id/et_closing"
+            android:id="@+id/tv_closing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -238,9 +238,9 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_tv_bkash_number"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bkash_number"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/et_owner_phone_number"
+            app:layout_constraintStart_toStartOf="@+id/tv_owner_phone_number"
             app:layout_constraintTop_toBottomOf="@+id/tv_closing_title"
             android:importantForAutofill="no"
             tools:ignore="LabelFor" />
@@ -256,13 +256,13 @@
             android:text="Restaurant Location"
             android:textColor="@color/text_gray"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/et_restaurant_name"
+            app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_restaurant_name"
-            app:layout_constraintTop_toBottomOf="@+id/et_opening" />
+            app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_opening" />
 
         <EditText
-            android:id="@+id/et_location"
+            android:id="@+id/tv_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -278,7 +278,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_owner_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_owner_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_title"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent=".80"
@@ -301,10 +301,10 @@
             android:textAllCaps="false"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/et_closing"
+            app:layout_constraintEnd_toEndOf="@+id/tv_closing"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/et_opening"
-            app:layout_constraintTop_toBottomOf="@+id/et_location" />
+            app:layout_constraintStart_toStartOf="@+id/tv_opening"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

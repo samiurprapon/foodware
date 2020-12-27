@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import life.nsu.foodware.utils.UserConfirmation;
 import life.nsu.foodware.views.AuthenticationActivity;
+import life.nsu.foodware.views.vendor.VendorHomeActivity;
 import life.nsu.foodware.views.vendor.profile.CreateVendorProfile;
 
 public class SplashActivityViewModel extends AndroidViewModel implements UserConfirmation {
@@ -44,22 +45,22 @@ public class SplashActivityViewModel extends AndroidViewModel implements UserCon
     @Override
     public void activitySwitch(String user) {
         switch (user) {
-            case "customer" :
+            case "customer":
                 //TODO
                 // redirect to customer home page
                 break;
-            case "vendor" :
+            case "vendor":
                 //TODO
                 // redirect to vendor home page
                 break;
-            case "rider" :
+            case "rider":
                 //TODO
                 // redirect to rider homepage
                 break;
             default:
                 //TODO
                 // redirect to authentication page
-                Intent intent = new Intent(getApplication().getApplicationContext(), CreateVendorProfile.class);
+                Intent intent = new Intent(getApplication().getApplicationContext(), VendorHomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(intent);
 

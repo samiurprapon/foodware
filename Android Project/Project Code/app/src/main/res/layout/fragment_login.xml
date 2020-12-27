@@ -17,13 +17,13 @@
         android:text="@string/title_email_address"
         android:textColor="@color/text_gray"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_restaurant_name"
+        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_restaurant_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_restaurant_name"
+        android:id="@+id/tv_restaurant_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -44,13 +44,13 @@
         android:text="@string/title_password"
         android:textColor="@color/text_gray"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_restaurant_name"
+        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_restaurant_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_name" />
 
     <EditText
-        android:id="@+id/et_owner_phone_number"
+        android:id="@+id/tv_owner_phone_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -74,10 +74,10 @@
         android:textSize="17sp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@+id/et_restaurant_name"
+        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_owner_phone_number" />
+        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone_number" />
 
     <Button
         android:id="@+id/btn_login"
@@ -91,8 +91,8 @@
         android:textSize="21sp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/et_owner_phone_number"
-        app:layout_constraintStart_toStartOf="@+id/et_owner_phone_number"
+        app:layout_constraintEnd_toEndOf="@+id/tv_owner_phone_number"
+        app:layout_constraintStart_toStartOf="@+id/tv_owner_phone_number"
         app:layout_constraintTop_toBottomOf="@+id/tv_forget_password" />
 
 
