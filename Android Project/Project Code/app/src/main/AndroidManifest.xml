@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Foodware"
         tools:ignore="AllowBackup">
-        <activity
-            android:name=".views.vendor.VendorHomeActivity" />
+        <activity android:name=".views.vendor.profile.CreateVendorProfile"></activity>
+        <activity android:name=".views.vendor.VendorHomeActivity" />
         <activity android:name=".views.AuthenticationActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

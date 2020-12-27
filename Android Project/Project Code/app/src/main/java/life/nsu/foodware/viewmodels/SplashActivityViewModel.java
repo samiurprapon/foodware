@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import life.nsu.foodware.utils.UserConfirmation;
 import life.nsu.foodware.views.AuthenticationActivity;
+import life.nsu.foodware.views.vendor.profile.CreateVendorProfile;
 
 public class SplashActivityViewModel extends AndroidViewModel implements UserConfirmation {
 
@@ -58,7 +59,7 @@ public class SplashActivityViewModel extends AndroidViewModel implements UserCon
             default:
                 //TODO
                 // redirect to authentication page
-                Intent intent = new Intent(getApplication().getApplicationContext(), AuthenticationActivity.class);
+                Intent intent = new Intent(getApplication().getApplicationContext(), CreateVendorProfile.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(intent);
 

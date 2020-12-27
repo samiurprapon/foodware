@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +46,8 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mEmail = view.findViewById(R.id.et_email);
-        mPassword = view.findViewById(R.id.et_password);
+        mEmail = view.findViewById(R.id.et_restaurant_name);
+        mPassword = view.findViewById(R.id.et_owner_phone_number);
 
         mForgetPassword = view.findViewById(R.id.tv_forget_password);
         mLogin = view.findViewById(R.id.btn_login);

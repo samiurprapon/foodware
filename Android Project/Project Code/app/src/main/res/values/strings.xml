@@ -5,6 +5,8 @@
     <string name="tab_sign_up">Sign up</string>
 
     <!--    All image description   -->
+    <string name="image_description">Nothing</string>
+
     <string name="splash_screen_logo_description">Logo will be replaced by original one</string>
 
     <string name="title_email_address">Email address</string>
@@ -31,7 +33,17 @@
     <string name="open">Open</string>
     <string name="Close">Close</string>
     <string name="busy">Busy</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Create vendor profile    -->
+    <string name="title_upload_logo">Upload your Logo</string>
+    <string name="title_restaurant_name">Restaurant Name</string>
+    <string name="title_owner_name">Owner Name</string>
+    <string name="title_owner_phone">Phone Number</string>
+    <string name="title_bkash_number">Bkash Number</string>
+    <string name="title_opening_at">Opening</string>
+    <string name="title_closing_at">Closing</string>
+    <string name="place_holder_start_time">07:00 AM</string>
+    <string name="place_holder_end_time">11:00 PM</string>
+    <string name="title_create">Create</string>
 
 </resources>
