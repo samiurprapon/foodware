@@ -15,7 +15,7 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="8dp" />
-            <solid android:color="@color/black" />
+            <solid android:color="@color/button_gray" />
             <stroke
                 android:width="2dip"
                 android:color="@color/green_dark" />

@@ -47,5 +47,7 @@
     <string name="title_create">Create</string>
     <string name="title_restaurant_location">Restaurant Location</string>
     <string name="title_update">Update</string>
+    <string name="title_menu_items">Menu Items</string>
+    <string name="sub_title_your_cooking_meals">Your cooking Meals</string>
 
 </resources>
