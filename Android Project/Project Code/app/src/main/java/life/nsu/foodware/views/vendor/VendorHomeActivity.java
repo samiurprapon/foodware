@@ -3,6 +3,7 @@ package life.nsu.foodware.views.vendor;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -41,7 +42,20 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         mDrawer = findViewById(R.id.drawer_layout);
 
         // Setup toggle to display hamburger icon with nice animation
-        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
+            @Override
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
         drawerToggle.setDrawerIndicatorEnabled(false);
         drawerToggle.setDrawerSlideAnimationEnabled(true);
 
@@ -56,7 +70,6 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_hamburger);
         getSupportActionBar().show();
-
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -85,7 +98,7 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }

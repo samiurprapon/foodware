@@ -9,7 +9,7 @@
     tools:context=".views.LoginFragment">
 
     <TextView
-        android:id="@+id/tv_restaurant_title"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -17,13 +17,13 @@
         android:text="@string/title_email_address"
         android:textColor="@color/text_gray"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
+        app:layout_constraintEnd_toEndOf="@+id/et_email"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
+        app:layout_constraintStart_toStartOf="@+id/et_email"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/tv_restaurant_name"
+        android:id="@+id/et_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -32,11 +32,13 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_title"
-        app:layout_constraintWidth_percent=".80" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintWidth_percent=".80"
+        tools:ignore="LabelFor"
+        android:importantForAutofill="no" />
 
     <TextView
-        android:id="@+id/tv_owner_phone"
+        android:id="@+id/tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -44,13 +46,13 @@
         android:text="@string/title_password"
         android:textColor="@color/text_gray"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
+        app:layout_constraintEnd_toEndOf="@+id/et_email"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_name" />
+        app:layout_constraintStart_toStartOf="@+id/et_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
     <EditText
-        android:id="@+id/tv_owner_phone_number"
+        android:id="@+id/et_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -59,8 +61,10 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone"
-        app:layout_constraintWidth_percent=".80" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_password"
+        app:layout_constraintWidth_percent=".80"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/tv_forget_password"
@@ -74,10 +78,10 @@
         android:textSize="17sp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@+id/tv_restaurant_name"
+        app:layout_constraintEnd_toEndOf="@+id/et_email"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone_number" />
+        app:layout_constraintStart_toStartOf="@+id/et_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
     <Button
         android:id="@+id/btn_login"
@@ -91,8 +95,8 @@
         android:textSize="21sp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_owner_phone_number"
-        app:layout_constraintStart_toStartOf="@+id/tv_owner_phone_number"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
         app:layout_constraintTop_toBottomOf="@+id/tv_forget_password" />
 
 

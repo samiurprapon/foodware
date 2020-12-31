@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.vendor.AddMenuItemFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="274dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_add_item"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="255dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_items_you_cook"
+                android:textColor="@color/silver"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/ic_add_menu"
+                app:layout_constraintBottom_toTopOf="@+id/tv_item_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/tv_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_restaurant_name"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_item_name"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+            <EditText
+                android:id="@+id/tv_item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/roboto"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_price_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_title"
+                app:layout_constraintWidth_percent=".80"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tv_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="151dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_price"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/et_price"
+                app:layout_constraintEnd_toStartOf="@+id/tv_category_title"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
+
+            <EditText
+                android:id="@+id/et_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/roboto"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_available_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_price_title"
+                app:layout_constraintWidth_percent=".35"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tv_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_bkash_number"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/et_category"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_name"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/et_category"
+                app:layout_constraintTop_toTopOf="@+id/tv_price_title"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/et_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@+id/et_price"
+                app:layout_constraintEnd_toEndOf="@+id/tv_item_name"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/et_price"
+                app:layout_constraintTop_toTopOf="@+id/et_price"
+                app:layout_constraintWidth_percent=".35"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tv_available_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="271dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_available_time"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/et_available"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/et_price"
+                app:layout_constraintTop_toBottomOf="@+id/et_price" />
+
+            <EditText
+                android:id="@+id/et_available"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/roboto"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_discount_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_available_title"
+                app:layout_constraintWidth_percent=".80"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/tv_discount_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="324dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/title_discount_optional"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@+id/et_discount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/et_available"
+                app:layout_constraintTop_toBottomOf="@+id/et_available" />
+
+            <EditText
+                android:id="@+id/et_discount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/roboto"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_discount_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_discount_title"
+                app:layout_constraintWidth_percent=".35"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/btn_create"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/selector_small_rounded_button"
+                android:fontFamily="@font/roboto"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/title_add_item"
+                android:textAllCaps="false"
+                android:textSize="21sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/et_available"
+                app:layout_constraintStart_toStartOf="@+id/et_available"
+                app:layout_constraintTop_toBottomOf="@+id/et_discount" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</FrameLayout>

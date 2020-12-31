@@ -50,4 +50,11 @@
     <string name="title_menu_items">Menu Items</string>
     <string name="sub_title_your_cooking_meals">Your cooking Meals</string>
 
+    <!--    Add Menu Item    -->
+    <string name="title_add_item">Add Item</string>
+    <string name="title_items_you_cook">Items you cook</string>
+    <string name="title_price">Price</string>
+    <string name="title_available_time">Available time :</string>
+    <string name="title_discount_optional">Discount(optional):</string>
+
 </resources>
