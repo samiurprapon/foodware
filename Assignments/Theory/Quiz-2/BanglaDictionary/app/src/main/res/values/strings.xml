@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Bangla Dictionary</string>
+    <string name="hint_english_word">English Word</string>
+    <string name="title_add_new_word">Add New word</string>
+    <string name="hint_bangla_meaning">Bangla Meaning</string>
+    <string name="title_add">Add</string>
 </resources>

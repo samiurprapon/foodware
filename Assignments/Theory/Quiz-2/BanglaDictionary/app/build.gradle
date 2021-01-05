@@ -39,4 +39,13 @@ dependencies {
 
 //    No-SQL like database
     implementation 'io.paperdb:paperdb:2.7.1'
+
+//    circle image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+//    Image cropper Library
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+//    collect permission on runtime
+    implementation 'com.karumi:dexter:6.2.0'
 }
