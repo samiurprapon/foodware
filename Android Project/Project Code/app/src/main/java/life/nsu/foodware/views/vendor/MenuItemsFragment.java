@@ -41,9 +41,7 @@ public class MenuItemsFragment extends Fragment {
 
         mAdd = view.findViewById(R.id.ib_add_menu);
 
-        mAdd.setOnClickListener(v -> {
-            changeFragment(AddMenuItemFragment.newInstance());
-        });
+        mAdd.setOnClickListener(v -> changeFragment(AddMenuItemFragment.newInstance()));
     }
 
     private void changeFragment(Fragment fragment) {

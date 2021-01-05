@@ -60,7 +60,7 @@ public class SplashActivityViewModel extends AndroidViewModel implements UserCon
             default:
                 //TODO
                 // redirect to authentication page
-                Intent intent = new Intent(getApplication().getApplicationContext(), VendorHomeActivity.class);
+                Intent intent = new Intent(getApplication().getApplicationContext(), AuthenticationActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(intent);
 

@@ -1,5 +1,6 @@
 package life.nsu.foodware.views.vendor;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -98,10 +99,13 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+//        Log.d("Hamburger", "onOptionsItemSelected: "+item.getItemId());
+        if (item != null && item.getItemId() == R.id.home) {
+            toggle();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -119,12 +123,13 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment = null;
+        Fragment fragment;
 
         switch (menuItem.getItemId()) {
-            case R.id.home:
+            case R.id.vendor_home:
                 fragment = VendorHomeFragment.newInstance();
                 break;
             case R.id.menu:
@@ -153,5 +158,13 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
 
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void toggle() {
+        if (mDrawer.isDrawerVisible(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            mDrawer.openDrawer(GravityCompat.START);
+        }
     }
 }

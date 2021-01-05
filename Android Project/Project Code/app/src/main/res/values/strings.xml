@@ -56,5 +56,6 @@
     <string name="title_price">Price</string>
     <string name="title_available_time">Available time :</string>
     <string name="title_discount_optional">Discount(optional):</string>
+    <string name="title_category">Category</string>
 
 </resources>
