@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="commonBackground">#414141</color>
+    <color name="faded_white">#4DFFFFFF</color>
+
 </resources>

@@ -152,7 +152,7 @@ public class AddWordActivity extends AppCompatActivity {
     }
 
     private void showSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomDialog);
         builder.setTitle("Storage Permission");
 
         builder.setMessage("Storage Permission is needed to select your profile picture");

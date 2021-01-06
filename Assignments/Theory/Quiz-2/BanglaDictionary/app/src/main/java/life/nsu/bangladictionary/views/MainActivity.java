@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +21,7 @@ import java.util.Locale;
 import io.paperdb.Paper;
 import life.nsu.bangladictionary.R;
 import life.nsu.bangladictionary.models.Vocabulary;
+import life.nsu.bangladictionary.utils.CustomDialog;
 import life.nsu.bangladictionary.utils.OnItemClickListener;
 import life.nsu.bangladictionary.utils.RecyclerViewClickLister;
 import life.nsu.bangladictionary.utils.VocabularyAdapter;
@@ -33,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView mbanglaMeaning;
     private TextView mTitle;
 
-    private ImageButton mSearch;
-    private ImageButton mInsert;
+    ImageButton mSearch;
+    ImageButton mInsert;
     private ImageButton mList;
 
     private RecyclerView mRecyclerView;
     private VocabularyAdapter adapter;
+    private CustomDialog popup;
 
     private boolean flag = false;
     private boolean languageFlag = false;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         if (wordList.size() == 0) {
             // load from csv file
         }
+
+        popup = new CustomDialog(this);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -133,19 +137,10 @@ public class MainActivity extends AppCompatActivity {
     private void initializeRecyclerView() {
         adapter = new VocabularyAdapter(this);
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerViewClickLister(MainActivity.this, mRecyclerView, new OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Vocabulary vocabulary = adapter.getVocabulary(position);
+        mRecyclerView.addOnItemTouchListener(new RecyclerViewClickLister(MainActivity.this, mRecyclerView, (view, position) -> {
+            Vocabulary vocabulary = adapter.getVocabulary(position);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
-                builder.setTitle(vocabulary.getEnglish());
-                builder.setMessage(vocabulary.getBangla());
-
-                builder.setCancelable(true);
-                builder.show();
-
-            }
+            popup.show(vocabulary);
         }));
 
 

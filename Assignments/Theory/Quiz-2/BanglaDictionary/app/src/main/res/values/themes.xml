@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="CustomAlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="CustomDialog" parent="Theme.AppCompat.Dialog.Alert">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/commonBackground</item>
         <item name="android:textColor">@android:color/white</item>
