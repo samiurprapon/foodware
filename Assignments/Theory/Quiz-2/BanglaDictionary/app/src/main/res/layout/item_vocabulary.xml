@@ -16,8 +16,8 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_upload_placeholder"
         app:civ_border_color="#414141"
-        app:civ_border_width="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/et_english"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_english"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
