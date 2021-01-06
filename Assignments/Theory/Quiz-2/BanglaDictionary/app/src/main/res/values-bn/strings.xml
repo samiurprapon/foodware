@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">বাংলা অভিধান</string>
+    <string name="hint_english_word">ইংরেজি শব্দ</string>
+    <string name="title_add_new_word">নতুন শব্দ যোগ</string>
+    <string name="hint_bangla_meaning">বাংলা অর্থ</string>
+    <string name="title_add">যুক্ত করুন</string>
+    <string name="hint_search_word">অর্থ খুঁজুন</string>
+    <string name="toast_message_not_found">খুঁজে পাওা যায় নি!</string>
+    <string name="en">bn</string>
+    <string name="dictionary">অভিধান</string>
+
+</resources>

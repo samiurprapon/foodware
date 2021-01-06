@@ -5,4 +5,7 @@
     <string name="hint_bangla_meaning">Bangla Meaning</string>
     <string name="title_add">Add</string>
     <string name="hint_search_word">search word</string>
+    <string name="toast_message_not_found">No word found!</string>
+    <string name="en">en</string>
+    <string name="dictionary">Dictionary</string>
 </resources>

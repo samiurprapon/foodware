@@ -5,7 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".views.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_locale"
+        style="@style/FontLocalize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginEnd="16dp"
+        android:focusable="false"
+        android:background="@drawable/selector_image_button"
+        android:padding="8dp"
+        android:text="@string/en"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -13,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:fontFamily="@font/roboto"
+        style="@style/FontLocalize"
         android:text="@string/app_name"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -28,7 +43,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="16dp"
-        android:fontFamily="@font/roboto"
+        style="@style/FontLocalize"
         android:hint="@string/hint_search_word"
         android:importantForAutofill="no"
         android:inputType="text"
@@ -59,7 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/hind_siliguri_light"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/ib_save"
@@ -72,10 +87,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/selector_image_button"
         android:src="@drawable/ic_upload"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_title_dictionary"
         app:layout_constraintEnd_toStartOf="@+id/ib_list"
         app:layout_constraintStart_toStartOf="@+id/tv_result"
         app:layout_constraintTop_toBottomOf="@+id/tv_result"
@@ -93,14 +108,30 @@
         app:layout_constraintTop_toTopOf="@+id/ib_save"
         tools:ignore="ContentDescription" />
 
+    <TextView
+        android:id="@+id/tv_title_dictionary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        style="@style/FontLocalize"
+        android:text="@string/dictionary"
+        android:visibility="invisible"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_save" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ib_save"
-        tools:layout_editor_absoluteX="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_result"
+        app:layout_constraintStart_toStartOf="@+id/tv_result"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_dictionary"
         tools:listitem="@layout/item_vocabulary" />
 
 
