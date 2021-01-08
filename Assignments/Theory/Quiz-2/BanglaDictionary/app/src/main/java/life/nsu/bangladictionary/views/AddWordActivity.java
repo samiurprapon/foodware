@@ -84,8 +84,6 @@ public class AddWordActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 Toast.makeText(this, "New word added!", Toast.LENGTH_LONG).show();
                 startActivity(intent);
-
-
             }
         });
 

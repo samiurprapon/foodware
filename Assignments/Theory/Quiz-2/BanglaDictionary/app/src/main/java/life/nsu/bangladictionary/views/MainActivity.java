@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +21,6 @@ import io.paperdb.Paper;
 import life.nsu.bangladictionary.R;
 import life.nsu.bangladictionary.models.Vocabulary;
 import life.nsu.bangladictionary.utils.CustomDialog;
-import life.nsu.bangladictionary.utils.OnItemClickListener;
 import life.nsu.bangladictionary.utils.RecyclerViewClickLister;
 import life.nsu.bangladictionary.utils.VocabularyAdapter;
 
@@ -66,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
         Paper.init(this);
         wordList = Paper.book().read("words", new ArrayList<>());
-
-        if (wordList.size() == 0) {
-            // load from csv file
-        }
+//
+//        if (wordList.size() == 0) {
+//            // load from csv file
+//        }
 
         popup = new CustomDialog(this);
 
@@ -157,14 +155,13 @@ public class MainActivity extends AppCompatActivity {
             Locale.setDefault(locale);
 
             config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         } else {
             Locale.setDefault(Locale.ENGLISH);
 
             config.locale = Locale.ENGLISH;
             onConfigurationChanged(config);
-            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
 }
