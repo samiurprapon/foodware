@@ -3,7 +3,7 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const Customers = Sequelize.define('customers', {
+const User = Sequelize.define('users', {
     id: {
         type: Datatypes.INTEGER,
         primaryKey: true,
@@ -26,7 +26,11 @@ const Customers = Sequelize.define('customers', {
         type: Datatypes.STRING,
         allowNull: true
     },
+    type: {
+        type: Datatypes.STRING, 
+        allowNull: false
+    }
 
 });
 
-module.exports = Customers;
+module.exports = User;

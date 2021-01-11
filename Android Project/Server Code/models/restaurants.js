@@ -5,6 +5,7 @@ const Datatypes = require('./index').DataTypes;
 
 const Vendor = require('./vendors');
 
+
 const Restaurant = Sequelize.define('restaurants', {
     id: {
         type: Datatypes.INTEGER,

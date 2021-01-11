@@ -3,7 +3,7 @@ POST http://localhost:3000/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "email" : "john@example.com",
+    "email" : "john2@example.com",
     "password": "123456",
     "type" : "vendor"
 }
@@ -27,4 +27,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvb
 ### deauthentication
 POST http://localhost:3000/api/auth/logout HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJ0eXBlIjoidmVuZG9yIiwiaWF0IjoxNjA4MDYzMTI3LCJleHAiOjE2MDgwNjU4Mjd9.T71CxeWf_B6SKVikjxDIgSXDEiVyCTbKtMxHW8qQ6d4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ0eXBlIjoidmVuZG9yIiwiaWF0IjoxNjEwMzkwMTg5LCJleHAiOjE2MTAzOTI4ODl9.OVo7KIHud8fT2Y7gV2HdPg-YfwTDLD32f8pI5rv75R4

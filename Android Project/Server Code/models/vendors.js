@@ -3,6 +3,8 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
+const User = require('./users');
+
 const Vendor = Sequelize.define('vendors', {
     id: {
         type: Datatypes.INTEGER,
@@ -14,7 +16,11 @@ const Vendor = Sequelize.define('vendors', {
         type: Datatypes.STRING,
         allowNull: false
     }, 
-    phone: {
+    trade: {
+        type: Datatypes.STRING,
+        allowNull: false
+    },
+    TIN: {
         type: Datatypes.STRING,
         allowNull: false
     }, 
@@ -25,8 +31,11 @@ const Vendor = Sequelize.define('vendors', {
     photo: {
         type: Datatypes.STRING,
         allowNull: true
-    },
+    }
 
 });
+
+User.hasMany(Vendor);
+Vendor.belongsTo(User);
 
 module.exports = Vendor;

@@ -1,4 +1,4 @@
-const Customer = require('../models/customers');
+const User = require('../models/users');
 
 const read = (req, res) => {
     //ToDo
