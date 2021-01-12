@@ -3,6 +3,9 @@ This project contains all the backend codes for Foodware - Food Catering Serive
 
 Express.js, Sequelize is used in this project.
 
+## Database Design
+[<img src="database_design.jpg" width="607" height="373"/>](1.png)
+
 
 ## Getting Started
 ### Prerequisites

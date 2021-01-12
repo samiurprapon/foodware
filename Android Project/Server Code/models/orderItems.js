@@ -3,26 +3,26 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const Item = require('./items');
-const Order = require('./orders');
-const Coupon = require('./coupons');
 
-const Orderitem = Sequelize.define('offerings', {
-    date: {
-        type: Datatypes.DATEONLY,
+const Orderitem = Sequelize.define('orderItems', {
+    id: {
+        type: Datatypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
         allowNull: false
-    },
-    status: {
-        type: Datatypes.BOOLEAN,
-        defaultValue: true
-    }    
+    }, 
+    quantity: {
+        type: Datatypes.INTEGER, 
+        allowNull: false
+    }, 
+    date: {
+        type: Datatypes.TIME, 
+        defaultValue: new Date().toISOString().replace(/T/, ' '). replace(/\..+/, '')     
+    }
+       
 }, { 
     timestamps: false 
 });
-
-Orderitem.hasMany(Order);
-Orderitem.hasMany(Item);
-Orderitem.hasOne(Coupon);
 
 
 module.exports = Orderitem;

@@ -3,8 +3,6 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const Order = require('./orders');
-
 const Coupon = Sequelize.define('coupons', {
     id: {
         type: Datatypes.INTEGER,
@@ -28,7 +26,6 @@ const Coupon = Sequelize.define('coupons', {
     timestamps: false 
 });
 
-Item.hasMany(Offering);
 
 
 module.exports = Coupon;

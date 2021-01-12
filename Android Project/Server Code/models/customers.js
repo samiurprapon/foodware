@@ -9,6 +9,10 @@ const Customer = Sequelize.define('customers', {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
+    },
+    avatar: {
+        type: Datatypes.STRING,
+        allowNull: true
     }, 
     name: {
         type: Datatypes.STRING,
@@ -18,13 +22,13 @@ const Customer = Sequelize.define('customers', {
         type: Datatypes.STRING,
         allowNull: false
     }, 
+    isVerified: {
+        type: Datatypes.BOOLEAN,
+        defaultValue: false
+    },
     location: {
         type: Datatypes.STRING, 
         allowNull: false
-    },
-    avatar: {
-        type: Datatypes.STRING,
-        allowNull: true
     }
 
 }, { 

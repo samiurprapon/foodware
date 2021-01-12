@@ -30,11 +30,11 @@ const Restaurant = Sequelize.define('restaurants', {
         type: Datatypes.BOOLEAN,
         defaultValue: true
     },
-    opening: {
+    openingAt: {
         type: Datatypes.TIME, 
         allowNull: false
     },
-    closing: {
+    closingAt: {
         type: Datatypes.TIME, 
         allowNull: false
     }
