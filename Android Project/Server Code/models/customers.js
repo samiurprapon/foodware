@@ -3,34 +3,30 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const Vendor = Sequelize.define('vendors', {
+const Customer = Sequelize.define('customers', {
     id: {
         type: Datatypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     }, 
-    owner: {
+    name: {
         type: Datatypes.STRING,
         allowNull: false
     }, 
-    trade: {
-        type: Datatypes.STRING,
-        allowNull: false
-    },
-    TIN: {
+    phone: {
         type: Datatypes.STRING,
         allowNull: false
     }, 
-    bkash: {
+    location: {
         type: Datatypes.STRING, 
         allowNull: false
     },
-    photo: {
+    avatar: {
         type: Datatypes.STRING,
         allowNull: true
     }
 
 });
 
-module.exports = Vendor;
+module.exports = Customer;

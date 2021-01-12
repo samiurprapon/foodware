@@ -1,4 +1,4 @@
-const User = require('../models/users');
+const Order = require('../models/orders');
 
 const read = (req, res) => {
     //ToDo

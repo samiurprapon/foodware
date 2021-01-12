@@ -3,7 +3,7 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const User = Sequelize.define('users', {
+const Rider = Sequelize.define('riders', {
     id: {
         type: Datatypes.INTEGER,
         primaryKey: true,
@@ -17,20 +17,28 @@ const User = Sequelize.define('users', {
     phone: {
         type: Datatypes.STRING,
         allowNull: false
-    }, 
-    location: {
-        type: Datatypes.STRING, 
-        allowNull: false
     },
-    photo: {
+    avatar: {
         type: Datatypes.STRING,
         allowNull: true
     },
-    type: {
-        type: Datatypes.STRING, 
-        allowNull: false
-    }
 
+    // 0 = all day
+    // 1 = 7 AM - 3 PM (Daty shift)
+    // 2 = 3PM - 11 PM (night shift)
+    shift: {
+        type: Datatypes.INTEGER, 
+        defaultValue: 0
+    },
+    area: {
+        type: Datatypes.STRING, 
+        allowNull: true
+    },
+    status: {
+        type: Datatypes.BOOLEAN, 
+        allowNull: false, 
+        defaultValue: false
+    }
 });
 
-module.exports = User;
+module.exports = Rider;
