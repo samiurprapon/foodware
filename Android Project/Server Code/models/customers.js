@@ -27,6 +27,8 @@ const Customer = Sequelize.define('customers', {
         allowNull: true
     }
 
+}, { 
+    timestamps: false 
 });
 
 module.exports = Customer;

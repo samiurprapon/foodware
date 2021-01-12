@@ -37,16 +37,9 @@ const Restaurant = Sequelize.define('restaurants', {
     closing: {
         type: Datatypes.TIME, 
         allowNull: false
-    },
-    vendorId: {
-        type: Datatypes.INTEGER,
-        references: {
-			model: Vendor,
-			key: 'id'
-        },
-        onDelete: 'CASCADE', 
-		onUpdate: 'CASCADE',
     }
+}, { 
+    timestamps: false 
 });
 
 Vendor.hasMany(Restaurant);

@@ -33,18 +33,12 @@ const Item = Sequelize.define('items', {
         defaultValue: false
     },
     discount: {
-        type: Datatypes.DOUBLE, 
+        type: Datatypes.DOUBLE,
+        defaultValue: 0, 
         allowNull: true
-    },
-    restaurantId: {
-        type: Datatypes.INTEGER,
-        references: {
-			model: Restaurant,
-			key: 'id'
-        },
-        onDelete: 'CASCADE', 
-		onUpdate: 'CASCADE',
     }
+}, { 
+    timestamps: false 
 });
 
 Restaurant.hasMany(Item);

@@ -3,36 +3,32 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const Vendor = Sequelize.define('vendors', {
+const Order = require('./orders');
+
+const Coupon = Sequelize.define('coupons', {
     id: {
         type: Datatypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     }, 
-    name: {
-        type: Datatypes.STRING,
-        allowNull: false
-    }, 
-    tradeLicense: {
+    code: {
         type: Datatypes.STRING,
         allowNull: false
     },
-    TIN: {
-        type: Datatypes.STRING,
-        allowNull: false
-    }, 
-    bkash: {
-        type: Datatypes.STRING, 
+    rate: {        
+        type: Datatypes.DOUBLE,
         allowNull: false
     },
-    photo: {
-        type: Datatypes.STRING,
-        allowNull: true
-    }
-
+    status: {
+        type: Datatypes.BOOLEAN,
+        defaultValue: true
+    }    
 }, { 
     timestamps: false 
 });
 
-module.exports = Vendor;
+Item.hasMany(Offering);
+
+
+module.exports = Coupon;

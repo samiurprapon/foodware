@@ -39,6 +39,8 @@ const Rider = Sequelize.define('riders', {
         allowNull: false, 
         defaultValue: false
     }
+}, { 
+    timestamps: false 
 });
 
 module.exports = Rider;

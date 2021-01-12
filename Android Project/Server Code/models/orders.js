@@ -43,6 +43,8 @@ const Order = Sequelize.define('oders', {
         type: Datatypes.TIME, 
         allowNull: true
     },
+},{ 
+    timestamps: false 
 });
 
 Order.belongsTo(Restaurant);
