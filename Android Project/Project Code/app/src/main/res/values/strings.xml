@@ -58,4 +58,12 @@
     <string name="title_discount_optional">Discount(optional):</string>
     <string name="title_category">Category</string>
 
+    <!--    Menu Items    -->
+    <string name="placeholder_order_id">#iur-dhb-ed</string>
+    <string name="placeholder_amount">500</string>
+    <string name="button_title_items">Items</string>
+    <string name="button_title_today">Today</string>
+    <string name="button_title_next">Next</string>
+
+
 </resources>

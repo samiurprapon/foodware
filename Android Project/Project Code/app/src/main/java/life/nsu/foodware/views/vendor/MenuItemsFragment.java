@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,11 @@ public class MenuItemsFragment extends Fragment {
     @SuppressLint("StaticFieldLeak")
     private static MenuItemsFragment fragment = null;
     ImageButton mAdd;
+    Button mItems;
+    Button mToday;
+    Button mTomorrow;
+
+    boolean isSelected = false;
 
     public static MenuItemsFragment newInstance() {
         if (fragment == null) {
@@ -40,8 +46,19 @@ public class MenuItemsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mAdd = view.findViewById(R.id.ib_add_menu);
+        mItems = view.findViewById(R.id.btn_items);
+        mToday = view.findViewById(R.id.btn_today_items);
+        mTomorrow = view.findViewById(R.id.btn_tomorrow_items);
 
         mAdd.setOnClickListener(v -> changeFragment(AddMenuItemFragment.newInstance()));
+
+        mItems.setOnClickListener(v -> {
+            mItems.setSelected(!isSelected);
+
+            isSelected = !isSelected;
+
+        });
+
     }
 
     private void changeFragment(Fragment fragment) {
