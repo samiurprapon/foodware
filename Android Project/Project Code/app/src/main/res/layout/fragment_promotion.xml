@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".views.vendor.PromotionFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/green_dark"
+        android:textSize="24sp"
+        android:text="This will be working on upcoming release."/>
+
 
 
 </FrameLayout>

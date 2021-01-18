@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Foodware"
-        tools:ignore="AllowBackup">
+        tools:ignore="AllowBackup"
+        tools:replace="android:theme">
 
         <activity android:name=".views.vendor.profile.CreateVendorProfile"/>
         <activity android:name=".views.vendor.VendorHomeActivity"/>

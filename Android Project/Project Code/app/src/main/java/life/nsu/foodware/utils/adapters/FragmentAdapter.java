@@ -1,4 +1,4 @@
-package life.nsu.foodware.utils;
+package life.nsu.foodware.utils.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

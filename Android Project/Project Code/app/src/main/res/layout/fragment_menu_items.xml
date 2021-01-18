@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_fragment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -21,13 +21,13 @@
             android:text="@string/title_menu_items"
             android:textColor="@color/black"
             android:textSize="23sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintBottom_toTopOf="@+id/tv_sub_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_sub_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -39,7 +39,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/lt_buttons"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_fragment_title" />
 
         <ImageButton
             android:id="@+id/ib_add_menu"
@@ -49,9 +49,9 @@
             android:background="@drawable/selector_action_button"
             android:contentDescription="@string/image_description"
             android:src="@drawable/ic_add_button"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_sub_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@+id/tv_fragment_title" />
 
         <LinearLayout
             android:id="@+id/lt_buttons"
@@ -67,7 +67,7 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/tv_sub_title">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_items"

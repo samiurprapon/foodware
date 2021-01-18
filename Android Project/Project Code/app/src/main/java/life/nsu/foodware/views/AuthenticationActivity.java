@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import life.nsu.foodware.R;
-import life.nsu.foodware.utils.FragmentAdapter;
+import life.nsu.foodware.utils.adapters.FragmentAdapter;
 
 public class AuthenticationActivity extends AppCompatActivity {
 

@@ -65,5 +65,15 @@
     <string name="button_title_today">Today</string>
     <string name="button_title_next">Next</string>
 
+    <!--    Vendor UI texts  -->
+    <string name="ven_title_menu">Menu Items</string>
+    <string name="ven_sub_title_menu">Your all cooking meals</string>
+
+    <string name="ven_title_today">Today\'s Items</string>
+    <string name="ven_sub_title_today">Your offering meals</string>
+
+    <string name="ven_title_tomorrow">Tomorrow\'s Items</string>
+    <string name="ven_sub_title_tomorrow">What you want to offer?</string>
+
 
 </resources>

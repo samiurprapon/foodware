@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/iv_icon"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_margin="8dp"
@@ -32,7 +32,7 @@
             android:src="@drawable/ic_side_rectangle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/iv_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.92"
             tools:ignore="ContentDescription" />
@@ -50,7 +50,7 @@
             android:text="@string/placeholder_order_id"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/iv_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -81,8 +81,21 @@
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
+        <ToggleButton
+            android:id="@+id/tb_available"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            android:textOff=""
+            android:textOn=""
+            android:visibility="gone"
+            app:layout_constraintWidth_percent=".1"
+            app:layout_constraintHeight_percent=".3"
+            android:background="@drawable/seletor_available"
+            app:layout_constraintBottom_toTopOf="@+id/imageView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </androidx.cardview.widget.CardView>
