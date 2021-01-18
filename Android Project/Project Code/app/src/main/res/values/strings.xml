@@ -57,6 +57,8 @@
     <string name="title_available_time">Available time :</string>
     <string name="title_discount_optional">Discount(optional):</string>
     <string name="title_category">Category</string>
+    <string name="title_item_name">Item Name</string>
+
 
     <!--    Menu Items    -->
     <string name="placeholder_order_id">#iur-dhb-ed</string>
@@ -74,6 +76,17 @@
 
     <string name="ven_title_tomorrow">Tomorrow\'s Items</string>
     <string name="ven_sub_title_tomorrow">What you want to offer?</string>
+
+    <!--    Order Item    -->
+    <string name="title_order_list">Order List</string>
+    <string name="sub_title_current_and_pending_orders">Current and pending orders</string>
+    <string name="title_status_completed">Completed</string>
+    <string name="title_current">Current</string>
+    <string name="title_pre_order">Pre-order</string>
+    <string name="ven_title_ongoing">Ongoing Orders</string>
+    <string name="ven_title_delivered">Order history</string>
+    <string name="ven_sub_title_delivered">Last 20 orders details</string>
+    <string name="ven_sub_title_ongoing">Accept and process food for hungers</string>
 
 
 </resources>
