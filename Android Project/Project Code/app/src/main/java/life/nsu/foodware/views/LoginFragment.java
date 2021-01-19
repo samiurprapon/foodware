@@ -1,6 +1,12 @@
 package life.nsu.foodware.views;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +20,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Objects;
 
+import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
 
@@ -25,9 +34,12 @@ public class LoginFragment extends Fragment {
     private EditText mEmail;
     private EditText mPassword;
 
-    private TextView mForgetPassword;
+    TextView mForgetPassword;
 
-    private Button mLogin;
+    Button mLogin;
+
+    SharedPreferences preferences;
+
 
 
     public static LoginFragment newInstance() {
@@ -52,6 +64,7 @@ public class LoginFragment extends Fragment {
         mForgetPassword = view.findViewById(R.id.tv_forget_password);
         mLogin = view.findViewById(R.id.btn_login);
 
+
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,10 +85,16 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 //TODO
                 // Intent to forget password activity
+                Snackbar.make(view, "This feature is not available right now.", Snackbar.LENGTH_SHORT).show();
             }
         });
 
     }
+
+    private void authentication(String email, String password) {
+
+    }
+
 
     private boolean validation() {
         String password = mPassword.getText().toString();

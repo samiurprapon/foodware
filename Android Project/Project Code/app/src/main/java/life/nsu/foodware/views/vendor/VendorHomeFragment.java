@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
 import life.nsu.foodware.models.Order;
 import life.nsu.foodware.utils.adapters.OrderAdapter;
@@ -37,6 +38,8 @@ public class VendorHomeFragment extends Fragment {
 
     OrderAdapter adapter;
     private ArrayList<Order> orderList;
+
+    NoInternetDialog noInternetDialog;
 
     int selection = 0; // 0 => Current orders, 1 => Delivered order, 2 => pre-order
 
@@ -76,6 +79,8 @@ public class VendorHomeFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        noInternetDialog = new NoInternetDialog.Builder(getContext()).build();
 
         defaultLoad();
         mConcurrent.setOnClickListener(v -> {
