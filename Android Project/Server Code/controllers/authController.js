@@ -22,7 +22,7 @@ const register = (req, res) => {
         });
     })
     .catch(err => {
-        res.status(401);
+        res.status(400);
         res.send({
             "message": "This email already in use!"
         });

@@ -4,6 +4,6 @@ public class RegistrationResponse {
     private String message;
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 }

@@ -1,18 +1,8 @@
 package life.nsu.foodware.views;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
-import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
 
 
 public class LoginFragment extends Fragment {
+
+    @SuppressLint("StaticFieldLeak")
+    static LoginFragment fragment = null;
 
     private EditText mEmail;
     private EditText mPassword;
@@ -38,12 +34,12 @@ public class LoginFragment extends Fragment {
 
     Button mLogin;
 
-    SharedPreferences preferences;
+//    SharedPreferences preferences;
 
-
-
-    public static LoginFragment newInstance() {
-        LoginFragment fragment = new LoginFragment();
+    public synchronized static LoginFragment newInstance() {
+        if(fragment == null) {
+            fragment = new LoginFragment();
+        }
         return fragment;
     }
 
@@ -83,9 +79,7 @@ public class LoginFragment extends Fragment {
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                // Intent to forget password activity
-                Snackbar.make(view, "This feature is not available right now.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getView(), "This feature is not available right now.", Snackbar.LENGTH_SHORT).show();
             }
         });
 

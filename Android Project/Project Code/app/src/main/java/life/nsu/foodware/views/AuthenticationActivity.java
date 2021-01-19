@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
 import life.nsu.foodware.utils.adapters.FragmentAdapter;
 
@@ -16,6 +17,8 @@ public class AuthenticationActivity extends AppCompatActivity {
     ViewPager mViewPager;
     FragmentAdapter adapter;
 
+    NoInternetDialog noInternetDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,8 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.tabLayout);
         mViewPager = findViewById(R.id.viewPager);
+
+        noInternetDialog = new NoInternetDialog.Builder(this).build();
 
         adapter = new FragmentAdapter(getSupportFragmentManager());
 
@@ -40,9 +45,20 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     }
 
+    public void selectTab(int position) {
+        mViewPager.setCurrentItem(position);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        noInternetDialog.onDestroy();
+    }
+
 }

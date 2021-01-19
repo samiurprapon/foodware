@@ -41,10 +41,13 @@ public class SplashActivity extends AppCompatActivity {
         refreshToken = preferences.getString("refreshToken", "null");
         accessToken = preferences.getString("accessToken", "null");
 
-        noInternetDialog = new NoInternetDialog.Builder(getApplicationContext()).build();
+        noInternetDialog = new NoInternetDialog.Builder(this).build();
 
-
-        new Handler(Looper.myLooper()).postDelayed(() -> sync(refreshToken), 200);
+        new Handler(Looper.myLooper()).postDelayed(() -> {
+            if (!noInternetDialog.isShowing()) {
+                sync(refreshToken);
+            }
+        }, 200);
 
     }
 
@@ -101,4 +104,9 @@ public class SplashActivity extends AppCompatActivity {
         getApplication().startActivity(intent);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        noInternetDialog.onDestroy();
+    }
 }
