@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
+import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
 import life.nsu.foodware.views.vendor.profile.VendorProfileFragment;
 
@@ -30,9 +31,13 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
     Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
 
+    NoInternetDialog noInternetDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_vendor_home);
 
         toolbar = findViewById(R.id.toolbar);
@@ -41,6 +46,8 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         // Find our drawer view
         navigationView = findViewById(R.id.navigation_view);
         mDrawer = findViewById(R.id.drawer_layout);
+
+        noInternetDialog = new NoInternetDialog.Builder(this).build();
 
         // Setup toggle to display hamburger icon with nice animation
         drawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close) {
@@ -166,5 +173,11 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         } else {
             mDrawer.openDrawer(GravityCompat.START);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        noInternetDialog.onDestroy();
     }
 }

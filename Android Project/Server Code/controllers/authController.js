@@ -42,7 +42,7 @@ const login = (req, res) => {
         if(!credential) {
             res.status(400);
             res.send({
-                'message': 'invalid password!', 
+                'message': 'invalid credentials!', 
             });
 
         } else if (credential.validPassword(req.body.password)) {
@@ -84,7 +84,7 @@ const login = (req, res) => {
              // wrong passwrord
              res.status(401);
              res.send({
-                 'message': 'wrong password!', 
+                 'message': 'invalid credentials!', 
              });
         }
         

@@ -1,4 +1,4 @@
-package life.nsu.foodware.views;
+package life.nsu.foodware.views.auth;
 
 import android.os.Bundle;
 
