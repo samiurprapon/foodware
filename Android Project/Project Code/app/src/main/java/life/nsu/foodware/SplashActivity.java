@@ -1,21 +1,34 @@
 package life.nsu.foodware;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.jetbrains.annotations.NotNull;
+
+import am.appwise.components.ni.NoInternetDialog;
+import life.nsu.foodware.utils.networking.ServerClient;
+import life.nsu.foodware.utils.networking.responses.RefreshResponse;
 import life.nsu.foodware.views.AuthenticationActivity;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     String type;
+    String refreshToken;
+    String accessToken;
+
+    NoInternetDialog noInternetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,40 +37,68 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         preferences = getApplication().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        type = preferences.getString("type", "none");
+        type = preferences.getString("type", "null");
+        refreshToken = preferences.getString("refreshToken", "null");
+        accessToken = preferences.getString("accessToken", "null");
 
-        new Handler(Looper.myLooper()).postDelayed(new Runnable() {
+        noInternetDialog = new NoInternetDialog.Builder(getApplicationContext()).build();
+
+
+        new Handler(Looper.myLooper()).postDelayed(() -> sync(refreshToken), 200);
+
+    }
+
+    private void sync(String refreshToken) {
+        Call<RefreshResponse> responseCall = ServerClient.getInstance().getRoute().refresh(refreshToken);
+
+        responseCall.enqueue(new Callback<RefreshResponse>() {
             @Override
-            public void run() {
-                activitySwitch(type);
+            public void onResponse(@NotNull Call<RefreshResponse> call, @NotNull Response<RefreshResponse> response) {
+                if(response.isSuccessful()) {
+                    RefreshResponse refreshResponse = response.body();
+                    preferences.edit().putString("accessToken", refreshResponse.getAccessToken()).apply();
+                    Log.d("accessToken", refreshResponse.getAccessToken());
+                    activitySwitch(type);
+
+                } else {
+                    activitySwitch("null");
+
+                }
+
             }
-        }, 500);
+
+            @Override
+            public void onFailure(@NotNull Call<RefreshResponse> call, @NotNull Throwable t) {
+                Log.d("RefreshResponse", t.getMessage());
+                activitySwitch("null");
+            }
+        });
 
     }
 
 
     public void activitySwitch(String type) {
+        Intent intent = null;
         switch (type) {
             case "customer":
                 //TODO
                 // redirect to customer home page
                 break;
             case "vendor":
-                //TODO
-                // redirect to vendor home page
+                intent = new Intent(SplashActivity.this, VendorHomeActivity.class);
                 break;
             case "rider":
                 //TODO
                 // redirect to rider homepage
                 break;
             default:
-                //TODO
-                // redirect to authentication page
-                Intent intent = new Intent(SplashActivity.this, AuthenticationActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplication().startActivity(intent);
+                intent = new Intent(SplashActivity.this, AuthenticationActivity.class);
+                break;
 
         }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplication().startActivity(intent);
     }
 
 }

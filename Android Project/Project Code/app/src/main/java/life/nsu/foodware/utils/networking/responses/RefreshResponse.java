@@ -1,4 +1,4 @@
-package life.nsu.foodware.utils.networking.requests;
+package life.nsu.foodware.utils.networking.responses;
 
 public class RefreshResponse {
 

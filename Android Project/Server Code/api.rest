@@ -14,17 +14,18 @@ POST http://localhost:3000/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email" : "john@example.com",
+    "email" : "john2@example.com",
     "password": "123456"
 }
+
 
 
 ### refreshing session
 POST http://localhost:3000/api/auth/refresh HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjRAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRhaXUvNGlGTzRORjFYVXV5QnZhcVFlYzNDRmVVcDRvU01BU0cvY3RyQjBWc2pyWGVsaU9JNiIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjIzODIsImV4cCI6MTYxMDY1NDM4Mn0.S-04k-RRsf0n5-2Y7gTIvF84EfW5CWZyjnx5mwDeLw0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4yQGV4YW1wbGUuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkTWF6eVZuWmFmbjFQdjZDR2wzdHFYT0pHN2V1MWVtaEkuZzNxWVh6UFpWdUIzR3FkejMwcGkiLCJ0eXBlIjoidmVuZG9yIiwiaWF0IjoxNjExMDg4MDc1LCJleHAiOjE2MTM2ODAwNzV9.49z4q0wR5nFzUhnoZtnl-XTM0oluPspYfyhkPbv-I4U
 
 ### deauthentication
 POST http://localhost:3000/api/auth/logout HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJ0eXBlIjoidmVuZG9yIiwiaWF0IjoxNjEwMzkwMTg5LCJleHAiOjE2MTAzOTI4ODl9.OVo7KIHud8fT2Y7gV2HdPg-YfwTDLD32f8pI5rv75R4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4yQGV4YW1wbGUuY29tIiwidHlwZSI6InZlbmRvciIsImlhdCI6MTYxMTA4ODUwNCwiZXhwIjoxNjExMDkxMjA0fQ.J8ZyTdIHWJlzlKe1gkeT7un0pO-1SRNW6JRd_rBxvAs

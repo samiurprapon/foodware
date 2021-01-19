@@ -1,7 +1,7 @@
 package life.nsu.foodware.utils.networking;
 
 import life.nsu.foodware.utils.networking.requests.AuthenticationRequest;
-import life.nsu.foodware.utils.networking.requests.RefreshResponse;
+import life.nsu.foodware.utils.networking.responses.RefreshResponse;
 import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
 import life.nsu.foodware.utils.networking.responses.AuthenticationResponse;
 import retrofit2.Call;
@@ -18,6 +18,6 @@ public interface ApiRoutes {
     Call<AuthenticationResponse> authentication(@Body AuthenticationRequest request);
 
     @POST("auth/refresh")
-    Call<RefreshResponse> refresh(@Header("Authorization") String accessToken);
+    Call<RefreshResponse> refresh(@Header("Authorization") String request);
 
 }

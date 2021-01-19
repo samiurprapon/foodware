@@ -100,7 +100,6 @@ const login = (req, res) => {
 const refresh = (req, res) => {
     let token = {};
 
-
     jwt.verify(res.locals.refreshToken, process.env.REFRESH_TOKEN_SECRET || config.REFRESH_TOKEN_SECRET, (err, user) => {
         if(err) {
         console.log(err);
@@ -167,11 +166,11 @@ function generateTokens (user) {
     });
   
   
-    token.accessToken = accessToken;
-    token.refreshToken = refreshToken;
+    token.accessToken = 'Bearer '+accessToken;
+    token.refreshToken = 'Bearer ' +refreshToken;
   
     return token;
-  };
+  }
 
 module.exports = {
     register, 

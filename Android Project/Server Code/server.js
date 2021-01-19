@@ -32,7 +32,7 @@ server.use('/api/restaurant/offering', offeringRoutes.router);
 server.use('/api/order', orderRoutes.router);
 
 Sequelize.sync({
-    force: true
+    force: false
 })
 .then( () => {
     server.listen(port, () => {
