@@ -12,7 +12,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();
 
     public FragmentAdapter(FragmentManager fm) {
-        super(fm, 1);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     @NonNull
