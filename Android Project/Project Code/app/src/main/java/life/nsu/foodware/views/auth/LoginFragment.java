@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +27,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 import life.nsu.foodware.R;
+import life.nsu.foodware.utils.CustomLoadingDialog;
 import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.requests.AuthenticationRequest;
 import life.nsu.foodware.utils.networking.responses.AuthenticationResponse;
+import life.nsu.foodware.views.customer.CustomerHomeActivity;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +50,7 @@ public class LoginFragment extends Fragment {
     Button mLogin;
 
     private SharedPreferences preferences;
+    private CustomLoadingDialog loadingDialog;
 
     public synchronized static LoginFragment newInstance() {
         if(fragment == null) {
@@ -78,6 +83,7 @@ public class LoginFragment extends Fragment {
         mForgetPassword = view.findViewById(R.id.tv_forget_password);
         mLogin = view.findViewById(R.id.btn_login);
 
+        loadingDialog = new CustomLoadingDialog(getContext());
 
         mLogin.setOnClickListener(v -> {
             if (!validation()) {
@@ -85,10 +91,21 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
+            loadingDialog.show();
+
             String password = mPassword.getText().toString().trim();
             String email = mEmail.getText().toString().trim();
 
-            authentication(email, password);
+            new Handler(Looper.myLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    authentication(email, password);
+
+                    loadingDialog.hide();
+
+                }
+            }, 250);
+
         });
 
         mForgetPassword.setOnClickListener(v -> Snackbar.make(getView(), "This feature is not available right now.", Snackbar.LENGTH_SHORT).show());
@@ -149,7 +166,7 @@ public class LoginFragment extends Fragment {
         if (Objects.equals(type, "customer")) {
             //TODO
             // clear tasks
-            // redirect to @CustomerHomeActivity
+            intent = new Intent(getContext(), CustomerHomeActivity.class);
             // if user is new
             // redirect to @CustomerCreateProfileFragment
         } else if (Objects.equals(type, "rider")) {
@@ -168,7 +185,7 @@ public class LoginFragment extends Fragment {
 
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            getActivity().startActivity(intent);
+            Objects.requireNonNull(getActivity()).startActivity(intent);
         }
     }
 }

@@ -10,7 +10,7 @@ public class ServerClient {
     //    test server
 //    private static final String BASE_URL = "https://honest-snake-3.telebit.io/";
 //    release server
-    private static final String BASE_URL = "https://d611aedf0f6a.ngrok.io/api/";
+    private static final String BASE_URL = "https://930d5010c324.ngrok.io/api/";
 
     private static ServerClient mInstance;
     Retrofit retrofit;

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,10 @@ import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import life.nsu.foodware.R;
+import life.nsu.foodware.utils.CustomLoadingDialog;
 import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
 import life.nsu.foodware.utils.networking.responses.MessageResponse;
@@ -45,16 +49,18 @@ public class RegisterFragment extends Fragment {
 
     String type = "null";
     SharedPreferences preferences;
+    private CustomLoadingDialog loadingDialog;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        preferences = Objects.requireNonNull(getContext()).getSharedPreferences("user", Context.MODE_PRIVATE);
 
     }
 
     public synchronized static RegisterFragment newInstance() {
-        if(fragment == null) {
+        if (fragment == null) {
             fragment = new RegisterFragment();
         }
         return fragment;
@@ -80,6 +86,7 @@ public class RegisterFragment extends Fragment {
 
         mSignUp = view.findViewById(R.id.btn_sign_up);
 
+        loadingDialog = new CustomLoadingDialog(getContext());
 
         mSignUp.setOnClickListener(v -> {
 
@@ -92,8 +99,13 @@ public class RegisterFragment extends Fragment {
             }
 
 //            mSignUp.setError(null);
+            new Handler(Looper.myLooper()).postDelayed(() -> {
+                registration(email, password, type);
 
-            registration(email, password, type);
+                loadingDialog.hide();
+
+            }, 250);
+
         });
 
         mType.setOnCheckedChangeListener((group, checkedId) -> {
@@ -130,21 +142,22 @@ public class RegisterFragment extends Fragment {
             public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
                 MessageResponse messageResponse;
 
-                if(response.body() != null) {
+                if (response.body() != null) {
                     messageResponse = response.body();
 
-                    Log.d("Request Body", "onResponse: "+ messageResponse);
+                    Log.d("Request Body", "onResponse: " + messageResponse);
 
                     if (response.isSuccessful()) {
-                        ((AuthenticationActivity) getActivity()).selectTab(0);
+                        ((AuthenticationActivity) Objects.requireNonNull(getActivity())).selectTab(0);
 
-                        Snackbar.make(getView(), messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(Objects.requireNonNull(getView()), messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
                     try {
                         Gson gson = new Gson();
+                        assert response.errorBody() != null;
                         MessageResponse errorResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
-                        Snackbar.make(getView(), errorResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(Objects.requireNonNull(getView()), errorResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
