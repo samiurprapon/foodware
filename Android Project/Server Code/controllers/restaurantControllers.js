@@ -1,12 +1,18 @@
 const Restaurant = require('../models/restaurants');
 
 const create = (req, res) => {
+    let user = res.locals.user ;
+
     Restaurant.create({
         name: req.body.name,
-        logo: req.body.logo,
+        email: user.email,
+        ownerName: req.body.ownerName,
         location: req.body.location,
-        opening: req.body.opening,
-        closing: req.body.closing,
+        phone: req.body.phone, 
+        bkash: req.body.bkash, 
+        status: req.body.status,
+        openingAt: req.body.opening,
+        closingAt: req.body.closing, 
     })
     .then(restaurant => {
         res.status(201);
@@ -22,14 +28,37 @@ const create = (req, res) => {
 
 };
 
-const update = (req, res) => {
+const logoChange = (req, res) => {
+    let user = res.locals.user ;
+
     Restaurant.update({
-        logo: req.body.logo,
+        logo: 'https://930d5010c324.ngrok.io/'+req.file.path
+    }, {
+        where: {
+            email: user.email
+        }
+    }).then(restaurant => {
+        res.status(201);
+        res.send({
+            'message': 'Image uploaded successfully!'
+        })
+    }).catch(err => {
+        res.status(400);
+        res.send({
+            'message': 'invaild image uploaded!'
+        })
+    });
+}
+
+const update = (req, res) => {
+    let user = res.locals.user ;
+
+    Restaurant.update({
         opening: req.body.opening,
         closing: req.body.closing,
     }, {
         where: {
-            id: req.body.id
+            email: user.email
         }
     })
     .then(restaurant => {
@@ -37,15 +66,63 @@ const update = (req, res) => {
         res.send(restaurant);
     })
     .catch(err => {
-        res.status(403);
+        res.status(400);
         res.send({
             'error' : true,
-            'message': 'failed'
+            'message': 'failed to update'
+        });
+    });
+}
+
+const isCompleted = (req, res) => {
+    let user = res.locals.user ;
+
+    Restaurant.findOne({
+        where: {
+            email: user.email
+        }
+    }).then(restaurant => {
+        res.status(202);
+        res.send({
+            'isCompleted': true, 
+            'message': 'Profile verification is completed!'
+        })
+    }).catch(err => {
+        res.status(204);
+        res.send({
+            'isCompleted': false, 
+            'message': 'Profile verification is completed!'
+        })
+    })
+
+}
+
+const changeStatus = (req, res) => {
+    let user = res.locals.user ;
+
+    Restaurant.update({
+        status: req.body.status,
+    }, {
+        where: {
+            email: user.email
+        }
+    }).then(result => {
+        res.status(200);
+        res.send({
+            'message': 'Restaurant opening status updated!'
+        });
+    }).catch(err => {
+        res.status(204);
+        res.send({
+            'message': 'Restaurant opening status can not be updated!'
         });
     });
 }
 
 module.exports = {
     create, 
-    update
+    update,
+    isCompleted,
+    logoChange, 
+    changeStatus
 }

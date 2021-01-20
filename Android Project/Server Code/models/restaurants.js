@@ -10,8 +10,13 @@ const Restaurant = Sequelize.define('restaurants', {
         autoIncrement: true,
         allowNull: false
     }, 
+    email: {
+        type: Datatypes.STRING,
+        allowNull: false
+    },
     name: {
         type: Datatypes.STRING,
+        unique: true,
         allowNull: false
     },
     ownerName: {
