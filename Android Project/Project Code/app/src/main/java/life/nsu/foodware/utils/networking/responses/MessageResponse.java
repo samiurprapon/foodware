@@ -1,6 +1,6 @@
 package life.nsu.foodware.utils.networking.responses;
 
-public class RegistrationResponse {
+public class MessageResponse {
     private String message;
 
     public String getMessage() {

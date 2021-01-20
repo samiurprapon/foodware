@@ -1,10 +1,14 @@
 package life.nsu.foodware.views.vendor;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -16,12 +20,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
+import life.nsu.foodware.utils.networking.ServerClient;
+import life.nsu.foodware.utils.networking.responses.MessageResponse;
+import life.nsu.foodware.views.auth.AuthenticationActivity;
 import life.nsu.foodware.views.vendor.profile.VendorProfileFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VendorHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,8 +45,10 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
     Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
 
-    NoInternetDialog noInternetDialog;
+    TextView mLogout;
 
+    SharedPreferences sharedPreferences;
+    NoInternetDialog noInternetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +62,9 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         // Find our drawer view
         navigationView = findViewById(R.id.navigation_view);
         mDrawer = findViewById(R.id.drawer_layout);
+        mLogout = findViewById(R.id.tv_logout);
+
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 
         noInternetDialog = new NoInternetDialog.Builder(this).build();
 
@@ -92,6 +111,53 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
                     .commit();
 
             mDrawer.closeDrawer(GravityCompat.START);
+        });
+
+        mLogout.setOnClickListener(v -> {
+            mDrawer.closeDrawer(GravityCompat.START);
+
+            syncLogout(v);
+        });
+    }
+
+    private void removeCredentials() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.remove("type");
+        editor.remove("accessToken");
+        editor.remove("refreshToken");
+        editor.apply();
+    }
+
+    private void syncLogout(View view) {
+        String accessToken = sharedPreferences.getString("accessToken", "null");
+
+        Call<MessageResponse> call = ServerClient.getInstance().getRoute().deAuthentication(accessToken);
+
+        call.enqueue(new Callback<MessageResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
+                if(response.isSuccessful()) {
+                    removeCredentials();
+
+                    Intent intent = new Intent(getApplication().getApplicationContext(), AuthenticationActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                } else {
+                    Gson gson = new Gson();
+                    try {
+                        MessageResponse messageResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
+                        Snackbar.make(view, messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
+
+            }
         });
     }
 

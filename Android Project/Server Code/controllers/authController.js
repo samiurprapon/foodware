@@ -119,7 +119,7 @@ const refresh = (req, res) => {
         res.status(200);
         res.send({
             'message': 'Token refreshed Successfully!', 
-            'accessToken': token.accessToken
+            'accessToken': 'Bearer '+token.accessToken
         });
     } else {
         res.status(403);
@@ -148,7 +148,9 @@ const deAuth = (req, res) => {
     })
     .catch(err => {
         res.status(403);
-        res.send();
+        res.send({
+            'message': 'Logout failed!'
+        });
     });
 }
 

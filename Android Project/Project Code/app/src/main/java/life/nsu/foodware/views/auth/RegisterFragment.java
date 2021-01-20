@@ -26,7 +26,7 @@ import java.io.IOException;
 import life.nsu.foodware.R;
 import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
-import life.nsu.foodware.utils.networking.responses.RegistrationResponse;
+import life.nsu.foodware.utils.networking.responses.MessageResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -120,30 +120,30 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registration(String email, String password, String type) {
-        Call<RegistrationResponse> registrationCall = ServerClient.getInstance().getRoute().registration(new RegistrationRequest(email, password, type));
+        Call<MessageResponse> registrationCall = ServerClient.getInstance().getRoute().registration(new RegistrationRequest(email, password, type));
 
         //ToDo
         // Create loading dialog
 
-        registrationCall.enqueue(new Callback<RegistrationResponse>() {
+        registrationCall.enqueue(new Callback<MessageResponse>() {
             @Override
-            public void onResponse(@NotNull Call<RegistrationResponse> call, @NotNull Response<RegistrationResponse> response) {
-                RegistrationResponse registrationResponse;
+            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
+                MessageResponse messageResponse;
 
                 if(response.body() != null) {
-                    registrationResponse = response.body();
+                    messageResponse = response.body();
 
-                    Log.d("Request Body", "onResponse: "+registrationResponse);
+                    Log.d("Request Body", "onResponse: "+ messageResponse);
 
                     if (response.isSuccessful()) {
                         ((AuthenticationActivity) getActivity()).selectTab(0);
 
-                        Snackbar.make(getView(), registrationResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(getView(), messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
                     try {
                         Gson gson = new Gson();
-                        RegistrationResponse errorResponse = gson.fromJson(response.errorBody().string(), RegistrationResponse.class);
+                        MessageResponse errorResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
                         Snackbar.make(getView(), errorResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -153,7 +153,7 @@ public class RegisterFragment extends Fragment {
 
 
             @Override
-            public void onFailure(@NotNull Call<RegistrationResponse> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
                 Log.d("RegistrationFailed", t.getMessage());
             }
         });
