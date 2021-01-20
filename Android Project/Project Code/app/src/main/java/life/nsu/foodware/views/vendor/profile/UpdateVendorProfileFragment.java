@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 import life.nsu.foodware.R;
 
-public class UpdateVendorProfile extends Fragment {
+public class UpdateVendorProfileFragment extends Fragment {
 
-    public static UpdateVendorProfile newInstance() {
-        return new UpdateVendorProfile();
+    public static UpdateVendorProfileFragment newInstance() {
+        return new UpdateVendorProfileFragment();
     }
 
     @Override

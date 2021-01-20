@@ -3,9 +3,6 @@
 const Sequelize = require('./index').Sequelize;
 const Datatypes = require('./index').DataTypes;
 
-const Vendor = require('./vendors');
-
-
 const Restaurant = Sequelize.define('restaurants', {
     id: {
         type: Datatypes.INTEGER,
@@ -17,12 +14,24 @@ const Restaurant = Sequelize.define('restaurants', {
         type: Datatypes.STRING,
         allowNull: false
     },
+    ownerName: {
+        type: Datatypes.STRING,
+        allowNull: false
+    },
     logo: {
         type: Datatypes.STRING,
         allowNull: true
     }, 
     // longitude, latitude
     location: {
+        type: Datatypes.STRING,
+        allowNull: false
+    },
+    phone: {
+        type: Datatypes.STRING,
+        allowNull: false
+    },
+    bKash: {
         type: Datatypes.STRING,
         allowNull: false
     },
@@ -41,8 +50,5 @@ const Restaurant = Sequelize.define('restaurants', {
 }, { 
     timestamps: false 
 });
-
-Vendor.hasMany(Restaurant);
-Restaurant.belongsTo(Vendor);
 
 module.exports = Restaurant;

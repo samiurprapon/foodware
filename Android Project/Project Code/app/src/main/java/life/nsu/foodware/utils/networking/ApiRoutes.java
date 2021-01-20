@@ -25,4 +25,7 @@ public interface ApiRoutes {
     @POST("auth/logout")
     Call<MessageResponse> deAuthentication(@Header("Authorization") String accessToken);
 
+
+//  Vendor API Routes
+
 }

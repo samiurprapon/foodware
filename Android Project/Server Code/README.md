@@ -112,6 +112,29 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvb
 }
 ```
 
+
+### Vendor Route
+
+#### Create Restaurant Profile
+POST /api/restaurant/
+```http
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
+```
+```json
+{
+    "logo": "url",
+    "name": "restaurant name", 
+    "ownerName": "owner name",
+    "phone" : "+88017XXXXXXXX",
+    "bkash": "+88018XXXXXXXX",
+    "location": "latitude, longitude", 
+    "status": "open/close",
+    "openingAt": "7:00 AM",
+    "closingAt" : "11:00 PM"
+}
+```
+
 ## License
 This project is licensed under [GPL-3.0 License](https://opensource.org/licenses/GPL-3.0).  
 Copyright (c) 2020 [Samiur Prapon](https://samiurprapon.github.io/).

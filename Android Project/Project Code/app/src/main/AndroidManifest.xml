@@ -18,7 +18,7 @@
         tools:ignore="AllowBackup"
         tools:replace="android:theme">
 
-        <activity android:name=".views.vendor.profile.CreateVendorProfile"/>
+        <activity android:name=".views.vendor.profile.CreateVendorProfileActivity"/>
         <activity android:name=".views.vendor.VendorHomeActivity"/>
         <activity android:name=".views.auth.AuthenticationActivity" />
 

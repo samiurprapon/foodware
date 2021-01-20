@@ -17,6 +17,7 @@ import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.responses.RefreshResponse;
 import life.nsu.foodware.views.auth.AuthenticationActivity;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
+import life.nsu.foodware.views.vendor.profile.CreateVendorProfileActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
