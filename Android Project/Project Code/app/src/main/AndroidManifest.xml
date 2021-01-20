@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="life.nsu.foodware">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -18,10 +18,10 @@
         tools:ignore="AllowBackup"
         tools:replace="android:theme">
 
-        <activity android:name=".views.vendor.profile.CreateVendorProfileActivity"/>
-        <activity android:name=".views.vendor.VendorHomeActivity"/>
+        <activity android:name=".views.customer.CustomerHomeActivity" />
+        <activity android:name=".views.vendor.profile.CreateVendorProfileActivity" />
+        <activity android:name=".views.vendor.VendorHomeActivity" />
         <activity android:name=".views.auth.AuthenticationActivity" />
-
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

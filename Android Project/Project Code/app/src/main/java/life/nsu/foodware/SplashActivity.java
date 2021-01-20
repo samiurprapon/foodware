@@ -16,8 +16,8 @@ import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.responses.RefreshResponse;
 import life.nsu.foodware.views.auth.AuthenticationActivity;
+import life.nsu.foodware.views.customer.CustomerHomeActivity;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
-import life.nsu.foodware.views.vendor.profile.CreateVendorProfileActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,8 +85,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent intent = null;
         switch (type) {
             case "customer":
-                //TODO
-                // redirect to customer home page
+                intent = new Intent(SplashActivity.this, CustomerHomeActivity.class);
                 break;
             case "vendor":
                 intent = new Intent(SplashActivity.this, VendorHomeActivity.class);
