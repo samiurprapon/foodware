@@ -79,16 +79,26 @@ const update = (req, res) => {
 const isCompleted = (req, res) => {
     let user = res.locals.user ;
 
+    console.log(user.email);
+
     Restaurant.findOne({
         where: {
             email: user.email
         }
     }).then(restaurant => {
-        res.status(202);
-        res.send({
-            'isCompleted': true, 
-            'message': 'Profile verification is completed!'
-        })
+        if(restaurant!= null) {
+            res.status(202);
+            res.send({
+                'isCompleted': true, 
+                'message': 'Profile verification is completed!'
+            })
+        } else {
+            res.status(204);
+            res.send({
+                'isCompleted': false, 
+                'message': 'Profile verification is completed!'
+            })
+        }
     }).catch(err => {
         res.status(204);
         res.send({
