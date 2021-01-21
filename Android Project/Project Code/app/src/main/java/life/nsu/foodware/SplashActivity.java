@@ -15,9 +15,11 @@ import org.jetbrains.annotations.NotNull;
 import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.responses.RefreshResponse;
+import life.nsu.foodware.utils.networking.responses.ValidationResponse;
 import life.nsu.foodware.views.auth.AuthenticationActivity;
 import life.nsu.foodware.views.customer.CustomerHomeActivity;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
+import life.nsu.foodware.views.vendor.profile.CreateVendorProfileActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     String type;
     String refreshToken;
     String accessToken;
+    boolean validate;
 
     NoInternetDialog noInternetDialog;
 
@@ -41,6 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         type = preferences.getString("type", "null");
         refreshToken = preferences.getString("refreshToken", "null");
         accessToken = preferences.getString("accessToken", "null");
+        validate = preferences.getBoolean("validation", false);
 
         noInternetDialog = new NoInternetDialog.Builder(this).build();
 
@@ -62,6 +66,18 @@ public class SplashActivity extends AppCompatActivity {
                     RefreshResponse refreshResponse = response.body();
                     preferences.edit().putString("accessToken", refreshResponse.getAccessToken()).apply();
                     Log.d("accessToken", refreshResponse.getAccessToken());
+
+                    if(type.equals("vendor")) {
+                        validation();
+
+                        if(!validate) {
+                            Intent intent = new Intent(SplashActivity.this, CreateVendorProfileActivity.class);
+
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    }
+
                     activitySwitch(type);
 
                 } else {
@@ -79,6 +95,28 @@ public class SplashActivity extends AppCompatActivity {
         });
 
     }
+
+
+    private void validation() {
+        Call<ValidationResponse> responseCall = ServerClient.getInstance().getRoute().validation(accessToken);
+
+        responseCall.enqueue(new Callback<ValidationResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<ValidationResponse> call, @NotNull Response<ValidationResponse> response) {
+                if(response.isSuccessful()) {
+                    if(response.body() != null) {
+                        preferences.edit().putBoolean("", response.body().isCompleted()).apply();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ValidationResponse> call, @NotNull Throwable t) {
+
+            }
+        });
+    }
+
 
 
     public void activitySwitch(String type) {

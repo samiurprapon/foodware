@@ -1,15 +1,15 @@
 package life.nsu.foodware.utils.networking.responses;
 
 public class StatusResponse {
-    private boolean isCompleted;
+    private String status;
     private String message;
 
-    public StatusResponse(boolean isCompleted, String message) {
-        this.isCompleted = isCompleted;
+    public StatusResponse(String status, String message) {
+        this.status = status;
         this.message = message;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
+    public String getStatus() {
+        return status;
     }
 }
