@@ -2,27 +2,30 @@ package life.nsu.foodware.views.vendor.profile;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import life.nsu.foodware.R;
+import life.nsu.foodware.utils.GpsTracker;
 
 public class CreateVendorProfileActivity extends AppCompatActivity {
 
@@ -32,9 +35,12 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
     EditText mOwnerName;
     EditText mPhoneNumber;
     EditText mBkash;
+    TextView mLocation;
 
     EditText mOpeningAt;
     EditText mClosingAt;
+
+    GpsTracker gpsTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +53,38 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         mOwnerName = findViewById(R.id.et_owner_name);
         mPhoneNumber = findViewById(R.id.et_owner_phone_number);
         mBkash = findViewById(R.id.et_bkash_number);
+        mLocation = findViewById(R.id.tv_location);
 
         mOpeningAt = findViewById(R.id.et_opening);
         mClosingAt = findViewById(R.id.et_closing);
 
         requestPermission();
+
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            } else {
+                getLocation();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            requestPermission();
+
+        }
+
+    }
+
+    public void getLocation(){
+        gpsTracker = new GpsTracker(this);
+        if(gpsTracker.canGetLocation()){
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+
+            String location = latitude +", "+ longitude;
+            mLocation.setText(location);
+        }else{
+            gpsTracker.showSettingsAlert();
+        }
     }
 
     private void requestPermission() {
@@ -71,12 +104,7 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
                         permissionToken.continuePermissionRequest();
                     }
                 })
-                .withErrorListener(new PermissionRequestErrorListener() {
-                    @Override
-                    public void onError(DexterError dexterError) {
-                        Toast.makeText(CreateVendorProfileActivity.this, "Error occurred"+dexterError.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                })
+                .withErrorListener(dexterError -> Toast.makeText(CreateVendorProfileActivity.this, "Error occurred"+dexterError.toString(), Toast.LENGTH_SHORT).show())
                 .check();
     }
 
@@ -92,9 +120,11 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
+        builder.setCancelable(false);
         builder.show();
 
     }
+
 
     // navigating user to app settings
     private void openSettings() {
@@ -102,5 +132,11 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         Uri uri = Uri.fromParts("package", getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gpsTracker.stopUsingGPS();
     }
 }
