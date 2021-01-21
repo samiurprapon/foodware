@@ -70,12 +70,6 @@ public class SplashActivity extends AppCompatActivity {
                     if(type.equals("vendor")) {
                         validation();
 
-                        if(!validate) {
-                            Intent intent = new Intent(SplashActivity.this, CreateVendorProfileActivity.class);
-
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                        }
                     }
 
                     activitySwitch(type);
@@ -136,6 +130,10 @@ public class SplashActivity extends AppCompatActivity {
                 intent = new Intent(SplashActivity.this, AuthenticationActivity.class);
                 break;
 
+        }
+
+        if(type.equals("vendor") && !validate) {
+            intent = new Intent(SplashActivity.this, CreateVendorProfileActivity.class);
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

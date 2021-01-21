@@ -51,4 +51,9 @@
         <item name="android:background">@drawable/selector_menu_selected_button</item>
         <item name="android:textColor">@drawable/selector_button_text_color</item>
     </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+    <item name="android:background">@color/gray_400</item>
+    <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

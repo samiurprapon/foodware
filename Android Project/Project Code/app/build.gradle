@@ -61,4 +61,7 @@ dependencies {
 //    Networking Components
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+
+    //    collect permission on runtime
+    implementation 'com.karumi:dexter:6.2.0'
 }
