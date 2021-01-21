@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import am.appwise.components.ni.NoInternetDialog;
 import life.nsu.foodware.R;
 import life.nsu.foodware.utils.networking.ServerClient;
 import life.nsu.foodware.utils.networking.responses.MessageResponse;
+import life.nsu.foodware.utils.networking.responses.StatusResponse;
 import life.nsu.foodware.views.auth.AuthenticationActivity;
 import life.nsu.foodware.views.vendor.profile.VendorProfileFragment;
 import retrofit2.Call;
@@ -44,6 +46,7 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
     private DrawerLayout mDrawer;
     Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
+    Button mStatus;
 
     TextView mLogout;
 
@@ -63,6 +66,7 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         navigationView = findViewById(R.id.navigation_view);
         mDrawer = findViewById(R.id.drawer_layout);
         mLogout = findViewById(R.id.tv_logout);
+        mStatus = findViewById(R.id.btn_restaurant_status);
 
         sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
 
@@ -113,10 +117,48 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
             mDrawer.closeDrawer(GravityCompat.START);
         });
 
+        mStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateRestaurantStatus(sharedPreferences.getString("accessToken", "null"));
+            }
+        });
+
         mLogout.setOnClickListener(v -> {
             mDrawer.closeDrawer(GravityCompat.START);
 
             syncLogout(v);
+        });
+    }
+
+    private void updateRestaurantStatus(String accessToken) {
+        String status = sharedPreferences.getString("status", "close");
+        if(status.equals("close")) {
+            status = "open";
+        } else {
+            status = "close";
+        }
+
+        Call<StatusResponse> call = ServerClient.getInstance().getRoute().updateStatus(accessToken, status);
+        String finalStatus = status;
+
+        call.enqueue(new Callback<StatusResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<StatusResponse> call, @NotNull Response<StatusResponse> response) {
+                if(response.isSuccessful()) {
+                    if (response.body() != null) {
+                        if(response.body().isCompleted()) {
+                            sharedPreferences.edit().putString("status", finalStatus).apply();
+                            mStatus.setText(finalStatus);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<StatusResponse> call, @NotNull Throwable t) {
+
+            }
         });
     }
 

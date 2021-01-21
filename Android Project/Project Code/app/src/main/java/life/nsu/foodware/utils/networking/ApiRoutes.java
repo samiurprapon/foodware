@@ -7,6 +7,7 @@ import life.nsu.foodware.utils.networking.responses.RefreshResponse;
 import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
 import life.nsu.foodware.utils.networking.responses.AuthenticationResponse;
 import life.nsu.foodware.utils.networking.responses.MessageResponse;
+import life.nsu.foodware.utils.networking.responses.StatusResponse;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,10 +33,20 @@ public interface ApiRoutes {
 
     //  Vendor API Routes
     @POST("restaurant/create")
-    Call<RestaurantResponse> createRestaurant(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
+    Call<RestaurantResponse> create(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
 
     @Multipart
     @POST("restaurant/logo")
-    Call<MessageResponse> uploadPhoto (@Part MultipartBody.Part file
+    Call<MessageResponse> uploadLogo (@Header("Authorization") String accessToken, @Part MultipartBody.Part file);
 
+    @POST("restaurant/validate")
+    Call<MessageResponse> validation(@Header("Authorization") String accessToken);
+
+
+    @POST("restaurant/create")
+    Call<RestaurantResponse> updateProfile(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
+
+
+    @POST("restaurant/status")
+    Call<StatusResponse> updateStatus(@Header("Authorization") String accessToken, @Body String status);
 }
