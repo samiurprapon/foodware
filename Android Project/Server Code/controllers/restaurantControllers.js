@@ -16,12 +16,14 @@ const create = (req, res) => {
     })
     .then(restaurant => {
         res.status(201);
-        res.send(restaurant);
+        res.send({
+            'message': 'Created restaurant!', 
+            'restaurant' : restaurant
+        });
     })
     .catch(err => {
         res.status(403);
         res.send({
-            'error' : true,
             'message': 'failed'
         });
     });
@@ -32,7 +34,7 @@ const logoChange = (req, res) => {
     let user = res.locals.user ;
 
     Restaurant.update({
-        logo: 'https://930d5010c324.ngrok.io/'+req.file.path
+        logo: 'https://265e64f7b8ba.ngrok.io'+req.file.path
     }, {
         where: {
             email: user.email

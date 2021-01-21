@@ -1,14 +1,19 @@
 package life.nsu.foodware.utils.networking;
 
+import life.nsu.foodware.models.Restaurant;
 import life.nsu.foodware.utils.networking.requests.AuthenticationRequest;
+import life.nsu.foodware.utils.networking.responses.RestaurantResponse;
 import life.nsu.foodware.utils.networking.responses.RefreshResponse;
 import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
 import life.nsu.foodware.utils.networking.responses.AuthenticationResponse;
 import life.nsu.foodware.utils.networking.responses.MessageResponse;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ApiRoutes {
 
@@ -25,7 +30,12 @@ public interface ApiRoutes {
     @POST("auth/logout")
     Call<MessageResponse> deAuthentication(@Header("Authorization") String accessToken);
 
+    //  Vendor API Routes
+    @POST("restaurant/create")
+    Call<RestaurantResponse> createRestaurant(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
 
-//  Vendor API Routes
+    @Multipart
+    @POST("restaurant/logo")
+    Call<MessageResponse> uploadPhoto (@Part MultipartBody.Part file
 
 }

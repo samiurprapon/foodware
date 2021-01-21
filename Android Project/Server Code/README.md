@@ -4,7 +4,7 @@ This project contains all the backend codes for Foodware - Food Catering Serive
 Express.js, Sequelize is used in this project.
 
 ## Database Design
-[<img src="database_design.jpg" width="607" height="373"/>](1.png)
+[<img src="database_design.png" height="551"/>](1.png)
 
 
 ## Getting Started
@@ -66,6 +66,7 @@ Express.js, Sequelize is used in this project.
 ## APIs
 
 ### Auth Route
+---
 
 #### Register
 `POST /api/auth/register`
@@ -76,7 +77,7 @@ Express.js, Sequelize is used in this project.
     "type" : "vendor"
 }
 ```
-**Description**: creates a new user; first user will be assigned as an admin user. Password is stored in `SHA512` format
+**Description**: creates a new user; first user will be assigned as an admin user. Password is stored in `HS256` format
 #### Login
 `POST /api/auth/login`
 ```json
@@ -114,26 +115,95 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvb
 
 
 ### Vendor Route
+---
 
-#### Create Restaurant Profile
-POST /api/restaurant/
+#### Update Restaurant Profile
+POST `/api/restaurant/update`
 ```http
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
 ```
 ```json
 {
-    "logo": "url",
-    "name": "restaurant name", 
-    "ownerName": "owner name",
-    "phone" : "+88017XXXXXXXX",
-    "bkash": "+88018XXXXXXXX",
-    "location": "latitude, longitude", 
-    "status": "open/close",
     "openingAt": "7:00 AM",
     "closingAt" : "11:00 PM"
 }
 ```
+
+**Description**: checks the JWT. Token from `Authorization` from should be passed as Url-encoded query or `x-access-token` header.
+
+```json
+{
+    "message": "reataurant ",
+    "restaurant" : {
+        "name": "KFC", 
+        "ownerName": "Karim ",
+        "phone" : "+8801345678901",
+        "bkash": "+880186754321",
+        "location": "74, 65", 
+        "status": "open",
+        "openingAt": "7:00 AM",
+        "closingAt" : "11:00 PM"
+    }
+}
+```
+
+#### Restaurant Logo Add
+POST `/api/restaurant/logo`
+```http
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
+```
+```json
+{
+    "file": "image File"
+}
+```
+
+**Description**: checks the JWT. Token from `Authorization` from should be passed as Url-encoded query or `x-access-token` header.
+
+```json
+{
+    "message": "Image upload successfully!"
+}
+```
+
+#### Restaurant validation
+POST `/api/restaurant/validate`
+```http
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
+```
+
+**Description**: checks the JWT. Token from `Authorization` from should be passed as Url-encoded query or `x-access-token` header.
+
+```json
+{
+    "isCompleted": true, 
+    "message": "Profile verification is completed!"
+}
+```
+
+#### Restaurant Status change
+POST `/api/restaurant/status`
+```http
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
+```
+```
+{
+    "status" : "Open"
+}
+```
+
+**Description**: checks the JWT. Token from `Authorization` from should be passed as Url-encoded query or `x-access-token` header.
+
+```json
+{
+    "message": "Restaurant opening status updated!" 
+}
+```
+
 
 ## License
 This project is licensed under [GPL-3.0 License](https://opensource.org/licenses/GPL-3.0).  
