@@ -140,17 +140,17 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
         }
 
         Call<StatusResponse> call = ServerClient.getInstance().getRoute().updateStatus(accessToken, status);
-        String finalStatus = status;
 
         call.enqueue(new Callback<StatusResponse>() {
             @Override
             public void onResponse(@NotNull Call<StatusResponse> call, @NotNull Response<StatusResponse> response) {
                 if(response.isSuccessful()) {
                     if (response.body() != null) {
-                        if(response.body().isCompleted()) {
-                            sharedPreferences.edit().putString("status", finalStatus).apply();
-                            mStatus.setText(finalStatus);
-                        }
+                        String finalStatus = response.body().getStatus();
+
+                        sharedPreferences.edit().putString("status", finalStatus).apply();
+                        mStatus.setText(finalStatus);
+
                     }
                 }
             }

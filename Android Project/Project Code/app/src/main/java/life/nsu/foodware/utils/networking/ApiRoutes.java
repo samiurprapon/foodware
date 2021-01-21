@@ -8,6 +8,7 @@ import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
 import life.nsu.foodware.utils.networking.responses.AuthenticationResponse;
 import life.nsu.foodware.utils.networking.responses.MessageResponse;
 import life.nsu.foodware.utils.networking.responses.StatusResponse;
+import life.nsu.foodware.utils.networking.responses.ValidationResponse;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,9 +28,9 @@ public interface ApiRoutes {
     @POST("auth/refresh")
     Call<RefreshResponse> refresh(@Header("Authorization") String request);
 
-
     @POST("auth/logout")
     Call<MessageResponse> deAuthentication(@Header("Authorization") String accessToken);
+
 
     //  Vendor API Routes
     @POST("restaurant/create")
@@ -40,12 +41,10 @@ public interface ApiRoutes {
     Call<MessageResponse> uploadLogo (@Header("Authorization") String accessToken, @Part MultipartBody.Part file);
 
     @POST("restaurant/validate")
-    Call<MessageResponse> validation(@Header("Authorization") String accessToken);
+    Call<ValidationResponse> validation(@Header("Authorization") String accessToken);
 
-
-    @POST("restaurant/create")
+    @POST("restaurant/update")
     Call<RestaurantResponse> updateProfile(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
-
 
     @POST("restaurant/status")
     Call<StatusResponse> updateStatus(@Header("Authorization") String accessToken, @Body String status);
