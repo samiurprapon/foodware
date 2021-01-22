@@ -113,9 +113,62 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvb
 }
 ```
 
+#### Logout
+`POST /api/auth/logout` 
+```http
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
+
+```
+
+**Description**: checks the JWT. Token from `Authorization` from should be passed as Url-encoded query or `x-access-token` header
+
+```json
+{
+  "message": "Logout successfully!"
+}
+```
+
 
 ### Vendor Route
 ---
+#### Create restaurant Profile
+
+POST `/api/restaurant/create`
+```http
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvbjNAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqNFUvbnVDLnlwZ2lNRC5Bbk5SdFZ1em53emNWVHpCd2JPTDhTaWlKa1RrbDFnck5SRGE4RyIsInR5cGUiOiJ2ZW5kb3IiLCJpYXQiOjE2MDgwNjQxMTUsImV4cCI6MTYxMDY1NjExNX0.J6uIMHHCzIhIrZWeB3nyLq7OlfZHJ7-lGhsdstW85J4
+```
+```json
+{
+    "name": "KFC", 
+    "ownerName": "Karim ",
+    "phone" : "+8801345678901",
+    "bkash": "+880186754321",
+    "location": "74, 65", 
+    "status": "open",
+    "openingAt": "7:00 AM",
+    "closingAt" : "11:00 PM"
+}
+```
+
+**Description**: checks the JWT. Token from `Authorization` from should be passed as Url-encoded query or `x-access-token` header.
+
+```json
+{
+    "message": "reataurant created successfully!",
+    "restaurant" : {
+        "name": "KFC", 
+        "ownerName": "Karim ",
+        "phone" : "+8801345678901",
+        "bkash": "+880186754321",
+        "location": "74, 65", 
+        "status": "open",
+        "openingAt": "7:00 AM",
+        "closingAt" : "11:00 PM"
+    }
+}
+```
 
 #### Update Restaurant Profile
 POST `/api/restaurant/update`
@@ -134,7 +187,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvb
 
 ```json
 {
-    "message": "reataurant ",
+    "message": "reataurant updated!",
     "restaurant" : {
         "name": "KFC", 
         "ownerName": "Karim ",
@@ -156,7 +209,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InByYXBvb
 ```
 ```json
 {
-    "file": "image File"
+    "photo": "image File"
 }
 ```
 
