@@ -3,7 +3,7 @@ const Restaurant = require('../models/restaurants');
 const create = (req, res) => {
     let user = res.locals.user ;
 
-    Restaurant.create({
+    Restaurant.upsert({
         name: req.body.name,
         email: user.email,
         ownerName: req.body.ownerName,
@@ -33,8 +33,8 @@ const create = (req, res) => {
 const logoChange = (req, res) => {
     let user = res.locals.user ;
 
-    Restaurant.update({
-        logo: 'https://265e64f7b8ba.ngrok.io'+req.file.path
+    Restaurant.upsert({
+        logo: 'https://265e64f7b8ba.ngrok.io/'+req.file.path
     }, {
         where: {
             email: user.email
@@ -112,7 +112,7 @@ const isCompleted = (req, res) => {
 const changeStatus = (req, res) => {
     let user = res.locals.user ;
 
-    Restaurant.update({
+    Restaurant.upsert({
         status: req.body.status,
     }, {
         where: {
