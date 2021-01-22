@@ -115,6 +115,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public void activitySwitch(String type) {
         Intent intent = null;
+
         switch (type) {
             case "customer":
                 intent = new Intent(SplashActivity.this, CustomerHomeActivity.class);

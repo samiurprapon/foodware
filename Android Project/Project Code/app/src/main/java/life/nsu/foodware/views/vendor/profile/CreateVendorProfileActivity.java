@@ -69,7 +69,7 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
     SharedPreferences restaurantPreference;
     GpsTracker gpsTracker;
     NoInternetDialog noInternetDialog;
-    CustomLoadingDialog loadingDialog;
+    private CustomLoadingDialog loadingDialog;
 
     String accessToken;
     String location;
