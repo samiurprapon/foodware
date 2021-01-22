@@ -125,7 +125,7 @@ public class CustomerMoreFragment extends Fragment {
     }
 
     private void syncLogout(View view) {
-        String accessToken = sharedPreferences.getString("accessToken", "null");
+        String accessToken = userPreferences.getString("accessToken", "null");
 
         Call<MessageResponse> call = ServerClient.getInstance().getRoute().deAuthentication(accessToken);
 
