@@ -2,7 +2,9 @@ package life.nsu.foodware.views.customer;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,38 +15,48 @@ import life.nsu.foodware.R;
 
 public class CustomerHomeActivity extends AppCompatActivity {
 
+    BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home);
+
+        bottomNavigationView = findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        loadFragment(RestaurantsFragment.newInstance());
     }
 
 
-    @SuppressLint("NonConstantResourceId")
-    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = item -> {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
 
-                Fragment fragment;
+            switch (item.getItemId()) {
+                case R.id.nav_restaurant:
+                    fragment = RestaurantsFragment.newInstance();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.nav_cart:
+                    fragment = CustomerCartFragment.newInstance();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.nav_history:
+                    fragment = CustomerOrderHistoryFragment.newInstance();
+                    loadFragment(fragment);
+                    return true;
 
-                switch (item.getItemId()) {
-                    case R.id.nav_restaurant:
-                        fragment = new RestaurantsFragment();
-                        loadFragment(fragment);
-                        return true;
-                    case R.id.nav_cart:
-                        fragment = CustomerCartFragment.newInstance();
-                        loadFragment(fragment);
-                        return true;
-                    case R.id.nav_history:
-                        fragment = CustomerOrderHistoryFragment.newInstance();
-                        loadFragment(fragment);
-                        return true;
-
-                    default:
-                        fragment = CustomerMoreFragment.newInstance();
-                        loadFragment(fragment);
-                        return true;
-                }
-            };
+                case R.id.nav_more:
+                    fragment = CustomerMoreFragment.newInstance();
+                    loadFragment(fragment);
+                    return true;
+            }
+            return false;
+        }
+    };
 
     /**
      * load fragment into FrameLayout
