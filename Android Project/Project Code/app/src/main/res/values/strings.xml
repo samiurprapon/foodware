@@ -92,5 +92,11 @@
     <string name="ven_sub_title_delivered">Last 20 orders details</string>
     <string name="ven_sub_title_ongoing">Accept and process food for hungers</string>
 
+    <!-- Customer More Fragment   -->
+    <string name="placeholeder_customer_name">Customer Name</string>
+    <string name="placeholeder_profile">Profile</string>
+    <string name="placeholeder_discount">Discount</string>
+    <string name="placeholeder_promotion">Promotion</string>
+    <string name="placeholeder_promo_code">Promo Code</string>
 
 </resources>
