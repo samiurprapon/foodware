@@ -55,6 +55,9 @@ dependencies {
 //    Circular Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+//  Image cropper Library
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
 //    No internet connect library
     implementation 'am.appwise.components:NoInternetDialog:1.1.3'
 

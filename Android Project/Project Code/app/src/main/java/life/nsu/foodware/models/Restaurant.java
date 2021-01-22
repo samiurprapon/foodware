@@ -7,27 +7,18 @@ public class Restaurant {
     private String phone;
     private String bkash;
     private String status;
+    private String location;
 
     private String openingAt;
     private String closingAt;
 
-    public Restaurant(String name, String ownerName, String phone, String bkash, String status, String openingAt, String closingAt) {
+    public Restaurant(String name, String ownerName, String phone, String bkash, String status, String location, String openingAt, String closingAt) {
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
         this.bkash = bkash;
         this.status = status;
-        this.openingAt = openingAt;
-        this.closingAt = closingAt;
-    }
-
-    public Restaurant(String photo, String name, String ownerName, String phone, String bkash, String status, String openingAt, String closingAt) {
-        this.photo = photo;
-        this.name = name;
-        this.ownerName = ownerName;
-        this.phone = phone;
-        this.bkash = bkash;
-        this.status = status;
+        this.location = location;
         this.openingAt = openingAt;
         this.closingAt = closingAt;
     }
@@ -40,12 +31,52 @@ public class Restaurant {
         this.photo = photo;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBkash() {
+        return bkash;
+    }
+
+    public void setBkash(String bkash) {
+        this.bkash = bkash;
+    }
+
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getOpeningAt() {

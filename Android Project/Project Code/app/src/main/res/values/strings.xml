@@ -46,8 +46,8 @@
     <string name="title_bkash_number">Bkash Number</string>
     <string name="title_opening_at">Opening</string>
     <string name="title_closing_at">Closing</string>
-    <string name="place_holder_start_time">07:00 AM</string>
-    <string name="place_holder_end_time">11:00 PM</string>
+    <string name="place_holder_start_time">07:00</string>
+    <string name="place_holder_end_time">23:00</string>
     <string name="title_create">Create</string>
     <string name="title_restaurant_location">Restaurant Location</string>
     <string name="title_update">Update</string>

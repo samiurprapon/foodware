@@ -34,7 +34,7 @@ public interface ApiRoutes {
 
     //  Vendor API Routes
     @POST("restaurant/create")
-    Call<RestaurantResponse> create(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
+    Call<RestaurantResponse> createRestaurant(@Header("Authorization") String accessToken, @Body Restaurant restaurant);
 
     @Multipart
     @POST("restaurant/logo")
