@@ -1,1 +1,0 @@
-# Bangla Dictionary app
