@@ -4,33 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
+import com.google.firebase.auth.FirebaseAuth;
 
 import life.nsu.foodware.R;
 import life.nsu.foodware.utils.CustomLoadingDialog;
-import life.nsu.foodware.utils.networking.ServerClient;
-import life.nsu.foodware.utils.networking.responses.MessageResponse;
 import life.nsu.foodware.views.auth.AuthenticationActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class CustomerMoreFragment extends Fragment {
@@ -125,45 +115,19 @@ public class CustomerMoreFragment extends Fragment {
     }
 
     private void syncLogout(View view) {
-        String accessToken = userPreferences.getString("accessToken", "null");
+        FirebaseAuth.getInstance().signOut();
+        loadingDialog.hide();
+        removeCredentials();
+        Intent intent = new Intent(getContext(), AuthenticationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
 
-        Call<MessageResponse> call = ServerClient.getInstance().getRoute().deAuthentication(accessToken);
-
-        call.enqueue(new Callback<MessageResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
-                loadingDialog.hide();
-                removeCredentials();
-
-                if(response.isSuccessful()) {
-                    Intent intent = new Intent(getContext(), AuthenticationActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    getActivity().startActivity(intent);
-                } else {
-                    Gson gson = new Gson();
-                    try {
-                        assert response.errorBody() != null;
-                        MessageResponse messageResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
-//                        Snackbar.make(view, messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
-
-            }
-        });
     }
 
     private void removeCredentials() {
         SharedPreferences.Editor editor = userPreferences.edit();
 
         editor.remove("type");
-        editor.remove("accessToken");
-        editor.remove("refreshToken");
         editor.apply();
     }
 
