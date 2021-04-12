@@ -13,27 +13,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
 import java.util.Objects;
 
 import life.nsu.foodware.R;
 import life.nsu.foodware.utils.CustomLoadingDialog;
-import life.nsu.foodware.utils.networking.ServerClient;
-import life.nsu.foodware.utils.networking.requests.RegistrationRequest;
-import life.nsu.foodware.utils.networking.responses.MessageResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class RegisterFragment extends Fragment {
 
@@ -51,12 +48,14 @@ public class RegisterFragment extends Fragment {
     SharedPreferences preferences;
     private CustomLoadingDialog loadingDialog;
 
+    FirebaseAuth mAuth;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = Objects.requireNonNull(getContext()).getSharedPreferences("user", Context.MODE_PRIVATE);
 
+        preferences = Objects.requireNonNull(getContext()).getSharedPreferences("user", Context.MODE_PRIVATE);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public synchronized static RegisterFragment newInstance() {
@@ -132,47 +131,24 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registration(String email, String password, String type) {
-        Call<MessageResponse> registrationCall = ServerClient.getInstance().getRoute().registration(new RegistrationRequest(email, password, type));
 
-        //ToDo
-        // Create loading dialog
-
-        registrationCall.enqueue(new Callback<MessageResponse>() {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(),  new OnCompleteListener<AuthResult>() {
             @Override
-            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
-                MessageResponse messageResponse;
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    ((AuthenticationActivity) Objects.requireNonNull(getActivity())).selectTab(0);
 
-                if (response.body() != null) {
-                    messageResponse = response.body();
+                    Snackbar.make(Objects.requireNonNull(getView()), "Signed up successfully!", Snackbar.LENGTH_SHORT).show();
 
-                    Log.d("Request Body", "onResponse: " + messageResponse);
-
-                    if (response.isSuccessful()) {
-                        ((AuthenticationActivity) Objects.requireNonNull(getActivity())).selectTab(0);
-
-                        Snackbar.make(Objects.requireNonNull(getView()), messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
-                    }
                 } else {
-                    try {
-                        Gson gson = new Gson();
-                        assert response.errorBody() != null;
-                        MessageResponse errorResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
-                        Snackbar.make(Objects.requireNonNull(getView()), errorResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+
                 }
-            }
-
-
-            @Override
-            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
-                Log.d("RegistrationFailed", t.getMessage());
             }
         });
 
-        //ToDo
-        // Close dialog
     }
 
     private boolean validation(String password, String confirmPassword) {
