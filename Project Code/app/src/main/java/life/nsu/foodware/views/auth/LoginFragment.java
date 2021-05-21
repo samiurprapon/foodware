@@ -20,16 +20,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 import life.nsu.foodware.R;
+import life.nsu.foodware.models.User;
 import life.nsu.foodware.utils.CustomLoadingDialog;
 import life.nsu.foodware.views.customer.CustomerHomeActivity;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
@@ -66,7 +65,7 @@ public class LoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        preferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        preferences = requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         mAuth = FirebaseAuth.getInstance();
         userType = preferences.getString("type", "null");
@@ -98,52 +97,70 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
-            loadingDialog.show();
+            loadingDialog.show("");
 
             String password = mPassword.getText().toString().trim();
             String email = mEmail.getText().toString().trim();
 
-            new Handler(Looper.myLooper()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    authentication(email, password);
+            new Handler(Looper.myLooper()).postDelayed(() -> {
+                authentication(email, password);
 
-                    loadingDialog.hide();
+                loadingDialog.hide();
 
-                }
             }, 250);
 
         });
 
-        mForgetPassword.setOnClickListener(v -> Snackbar.make(getView(), "This feature is not available right now.", Snackbar.LENGTH_SHORT).show());
+        mForgetPassword.setOnClickListener(v -> Snackbar.make(requireView(), "This feature is not available right now.", Snackbar.LENGTH_SHORT).show());
 
     }
 
     private void authentication(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                .addOnCompleteListener(requireActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success
+                        // fetch data "userType" from firebase database
+                        route(FirebaseAuth.getInstance().getUid());
+                        updatePreference(userType);
 
-                            // fetch data "userType" from firebase database
-                            userType = "customer";
-                            updatePreference(userType);
+                        activitySwitch(userType);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
 
-                            activitySwitch(userType);
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
-
-                        }
                     }
                 });
+    }
+
+
+    private void route(String uid) {
+        DatabaseReference mReference = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+        mReference.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                User user = Objects.requireNonNull(task.getResult()).getValue(User.class);
+
+                if(user != null && user.getType() != null) {
+                    userType = user.getType();
+
+                    updatePreference(userType);
+
+                    loadingDialog.hide();
+
+                    activitySwitch(userType);
+                } else {
+                    updatePreference(null);
+                    mAuth.signOut();
+
+                    loadingDialog.hide();
+                }
+
+            }
+        });
+
     }
 
     private boolean validation() {
@@ -163,8 +180,6 @@ public class LoginFragment extends Fragment {
         Intent intent = null;
 
         if (Objects.equals(type, "customer")) {
-            //TODO
-            // clear tasks
             intent = new Intent(getContext(), CustomerHomeActivity.class);
             // if user is new
             // redirect to @CustomerCreateProfileFragment
@@ -176,15 +191,13 @@ public class LoginFragment extends Fragment {
             // redirect to @RiderCreateProfileFragment
         } else if (Objects.equals(type, "vendor")) {
             intent = new Intent(getContext(), VendorHomeActivity.class);
-
-            //TODO
             // if user is new
             // redirect to @VendorCreateProfileFragment
         }
 
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            Objects.requireNonNull(getActivity()).startActivity(intent);
+            requireActivity().startActivity(intent);
         }
     }
 

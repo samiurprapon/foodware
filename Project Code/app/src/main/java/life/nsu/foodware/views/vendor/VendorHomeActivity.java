@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -172,35 +173,37 @@ public class VendorHomeActivity extends AppCompatActivity implements NavigationV
     }
 
     private void syncLogout(View view) {
-        String accessToken = sharedPreferences.getString("accessToken", "null");
-
-        Call<MessageResponse> call = ServerClient.getInstance().getRoute().deAuthentication(accessToken);
-
-        call.enqueue(new Callback<MessageResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
-                if(response.isSuccessful()) {
+//        String accessToken = sharedPreferences.getString("accessToken", "null");
+//
+//        Call<MessageResponse> call = ServerClient.getInstance().getRoute().deAuthentication(accessToken);
+//
+//        call.enqueue(new Callback<MessageResponse>() {
+//            @Override
+//            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
+//                if(response.isSuccessful()) {
                     removeCredentials();
+
+                    FirebaseAuth.getInstance().signOut();
 
                     Intent intent = new Intent(getApplication().getApplicationContext(), AuthenticationActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-                } else {
-                    Gson gson = new Gson();
-                    try {
-                        MessageResponse messageResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
-                        Snackbar.make(view, messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
-
-            }
-        });
+//                } else {
+//                    Gson gson = new Gson();
+//                    try {
+//                        MessageResponse messageResponse = gson.fromJson(response.errorBody().string(), MessageResponse.class);
+//                        Snackbar.make(view, messageResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
+//
+//            }
+//        });
     }
 
     @Override

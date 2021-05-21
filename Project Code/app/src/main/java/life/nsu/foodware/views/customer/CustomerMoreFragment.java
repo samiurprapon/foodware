@@ -75,7 +75,7 @@ public class CustomerMoreFragment extends Fragment {
         mLogout.setOnClickListener(v -> {
             mLogout.setEnabled(false);
 
-            loadingDialog.show();
+            loadingDialog.show("loging out...");
 
             new Handler(Looper.myLooper()).postDelayed(new Runnable() {
                 @Override

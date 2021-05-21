@@ -23,6 +23,12 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="CustomProgressBarTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="DrawerStyle" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/roboto</item>
     </style>

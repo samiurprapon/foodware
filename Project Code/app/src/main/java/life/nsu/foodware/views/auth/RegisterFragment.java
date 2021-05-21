@@ -19,12 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import life.nsu.foodware.R;
@@ -49,12 +49,14 @@ public class RegisterFragment extends Fragment {
     private CustomLoadingDialog loadingDialog;
 
     FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
+    DatabaseReference mReference;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        preferences = Objects.requireNonNull(getContext()).getSharedPreferences("user", Context.MODE_PRIVATE);
+        preferences = requireContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -98,11 +100,11 @@ public class RegisterFragment extends Fragment {
             }
 
 //            mSignUp.setError(null);
+            loadingDialog.show("");
+
             new Handler(Looper.myLooper()).postDelayed(() -> {
+                // call firebase database
                 registration(email, password, type);
-
-                loadingDialog.hide();
-
             }, 250);
 
         });
@@ -131,23 +133,46 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registration(String email, String password, String type) {
+        mAuth.setLanguageCode("en");
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(),  new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    ((AuthenticationActivity) Objects.requireNonNull(getActivity())).selectTab(0);
 
-                    Snackbar.make(Objects.requireNonNull(getView()), "Signed up successfully!", Snackbar.LENGTH_SHORT).show();
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity(), task -> {
+            if (task.isSuccessful()) {
+                // save to firebase database
+                mDatabase = FirebaseDatabase.getInstance();
+                mReference = mDatabase.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
 
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                HashMap<String, String> userMap = new HashMap<>();
+                userMap.put("email", email);
+                userMap.put("password", password);
+                userMap.put("type", type);
 
-                }
+
+                mReference.setValue(userMap).addOnCompleteListener(task2 -> {
+                    if (task.isComplete()) {
+                        route();
+                    } else {
+                        Log.w(TAG, "databaseInsert:failure", task.getException());
+                    }
+
+                    loadingDialog.hide();
+
+                });
+
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+
             }
         });
+
+    }
+
+    private void route() {
+        ((AuthenticationActivity) requireActivity()).selectTab(0);
+
+        Snackbar.make(requireView(), "Signed up successfully!", Snackbar.LENGTH_SHORT).show();
 
     }
 

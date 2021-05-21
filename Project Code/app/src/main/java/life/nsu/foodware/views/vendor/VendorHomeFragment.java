@@ -87,7 +87,7 @@ public class VendorHomeFragment extends Fragment {
 
         defaultLoad();
         mConcurrent.setOnClickListener(v -> {
-            loadingDialog.show();
+            loadingDialog.show("");
 
             defaultLoad();
 

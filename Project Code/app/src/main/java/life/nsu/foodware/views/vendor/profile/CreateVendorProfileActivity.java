@@ -129,12 +129,14 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         });
 
         mCreate.setOnClickListener(v -> {
-            if(!isValidated()) {
-                return;
-            }
-
-            createRestaurant();
+////            validation
+//            if(!isValidated()) {
+//                return;
+//            }
+//            createRestaurant();
+            route();
         });
+
 
     }
 
@@ -185,7 +187,7 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
     }
 
     private void uploadLogo(Uri uri) {
-        loadingDialog.show();
+        loadingDialog.show("");
         File file = new File(uri.getPath());
         RequestBody reqFile = RequestBody.create(MediaType.parse("image"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
@@ -217,7 +219,7 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
     }
 
     private void createRestaurant() {
-        loadingDialog.show();
+        loadingDialog.show("");
 
         Restaurant restaurant = new Restaurant(mRestaurantName.getText().toString().trim(), mOwnerName.getText().toString().trim(),
                             mPhoneNumber.getText().toString().trim(), mBkash.getText().toString().trim(), "open", location, mOpeningAt.getText().toString(), mClosingAt.getText().toString()) ;

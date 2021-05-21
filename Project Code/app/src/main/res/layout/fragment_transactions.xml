@@ -48,7 +48,7 @@
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:text="\u09F3 3.200,00"
-                android:textColor="@color/colorAccent"
+                android:textColor="#FF4081"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

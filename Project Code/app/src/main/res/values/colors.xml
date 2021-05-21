@@ -19,4 +19,6 @@
     <color name="gray_400">#414141</color>
 
     <color name="background">#FFFFFF</color>
+    <color name="_40_percent_white">#4DFFFFFF</color>
+
 </resources>

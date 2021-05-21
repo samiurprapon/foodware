@@ -9,6 +9,7 @@ import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 import am.appwise.components.ni.NoInternetDialog;
@@ -30,6 +31,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_splash);
+
+        FirebaseApp.initializeApp(this);
 
         preferences = getApplication().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         type = preferences.getString("type", "null");
