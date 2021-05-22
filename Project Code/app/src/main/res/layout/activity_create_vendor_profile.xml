@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,14 +16,14 @@
             android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/img_header"
             android:background="@color/transparent"
+            android:contentDescription="@string/image_description"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/image_description" />
+            app:srcCompat="@drawable/img_header" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_logo"
@@ -32,16 +31,16 @@
             android:layout_height="110dp"
             android:layout_marginStart="8dp"
             android:clickable="true"
+            android:contentDescription="@string/image_description"
             android:focusable="true"
-            android:src="@drawable/ic_upload_placeholder"
             android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_upload_placeholder"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.55"
-            android:contentDescription="@string/image_description" />
+            app:layout_constraintVertical_bias="0.55" />
 
         <TextView
             android:id="@+id/tv_title_upload_logo"
@@ -79,13 +78,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
+            android:importantForAutofill="no"
             android:inputType="text"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_title"
             app:layout_constraintWidth_percent=".80"
-            android:importantForAutofill="no"
             tools:ignore="LabelFor" />
 
         <TextView
@@ -109,13 +108,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
+            android:importantForAutofill="no"
             android:inputType="text"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_owner_title"
             app:layout_constraintWidth_percent=".80"
-            android:importantForAutofill="no"
             tools:ignore="LabelFor" />
 
         <TextView
@@ -139,7 +138,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
+            android:importantForAutofill="no"
             android:inputType="phone"
+            android:maxLength="11"
             android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,8 +148,7 @@
             app:layout_constraintStart_toStartOf="@+id/et_owner_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_owner_phone"
             app:layout_constraintWidth_percent=".35"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"/>
+            tools:ignore="LabelFor" />
 
         <TextView
             android:id="@+id/tv_bkash_number_title"
@@ -170,7 +170,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
+            android:importantForAutofill="no"
             android:inputType="phone"
+            android:maxLength="11"
             android:textColor="@color/black"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="@+id/et_owner_name"
@@ -178,7 +180,6 @@
             app:layout_constraintStart_toEndOf="@+id/et_owner_phone_number"
             app:layout_constraintTop_toBottomOf="@+id/tv_bkash_number_title"
             app:layout_constraintWidth_percent=".35"
-            android:importantForAutofill="no"
             tools:ignore="LabelFor" />
 
         <TextView
@@ -204,6 +205,7 @@
             android:background="@drawable/ic_outline_small"
             android:drawableEnd="@drawable/ic_clock"
             android:hint="@string/place_holder_start_time"
+            android:importantForAutofill="no"
             android:inputType="time"
             android:paddingStart="16sp"
             android:paddingEnd="8dp"
@@ -212,7 +214,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/et_owner_phone_number"
             app:layout_constraintTop_toBottomOf="@+id/tv_opening_title"
-            android:importantForAutofill="no"
             tools:ignore="LabelFor" />
 
         <TextView
@@ -238,6 +239,7 @@
             android:background="@drawable/ic_outline_small"
             android:drawableEnd="@drawable/ic_clock"
             android:hint="@string/place_holder_end_time"
+            android:importantForAutofill="no"
             android:inputType="time"
             android:paddingStart="16sp"
             android:paddingEnd="8dp"
@@ -246,7 +248,6 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/et_owner_phone_number"
             app:layout_constraintTop_toBottomOf="@+id/tv_closing_title"
-            android:importantForAutofill="no"
             tools:ignore="LabelFor" />
 
         <TextView
@@ -272,11 +273,13 @@
             android:layout_marginBottom="32dp"
             android:background="@drawable/ic_outline_large"
             android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:importantForAutofill="no"
             android:paddingStart="16dp"
             android:paddingEnd="8dp"
             android:textColor="@color/black"
             android:textSize="17sp"
-            android:gravity="center_vertical"
+            app:drawableEndCompat="@drawable/ic_navigation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -284,9 +287,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_location_title"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent=".80"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor"
-            app:drawableEndCompat="@drawable/ic_navigation" />
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/btn_create"
@@ -297,8 +298,8 @@
             android:background="@drawable/selector_small_rounded_button"
             android:fontFamily="@font/roboto"
             android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:paddingTop="8dp"
+            android:paddingEnd="8dp"
             android:paddingBottom="8dp"
             android:text="@string/title_create"
             android:textAllCaps="false"

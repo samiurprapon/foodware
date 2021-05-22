@@ -1,18 +1,22 @@
 package life.nsu.foodware.models;
 
 public class Restaurant {
-    private String photo;
+    private String logo;
     private String name;
     private String ownerName;
     private String phone;
     private String bkash;
     private String status;
-    private String location;
+    private Location location;
 
     private String openingAt;
     private String closingAt;
 
-    public Restaurant(String name, String ownerName, String phone, String bkash, String status, String location, String openingAt, String closingAt) {
+    public Restaurant() {
+        // empty constructor for firebase
+    }
+
+    public Restaurant(String name, String ownerName, String phone, String bkash, String status, Location location, String openingAt, String closingAt) {
         this.name = name;
         this.ownerName = ownerName;
         this.phone = phone;
@@ -23,12 +27,16 @@ public class Restaurant {
         this.closingAt = closingAt;
     }
 
-    public String getPhoto() {
-        return photo;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getName() {
@@ -71,13 +79,6 @@ public class Restaurant {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public String getOpeningAt() {
         return openingAt;

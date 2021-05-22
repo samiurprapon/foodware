@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Button;
@@ -19,6 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -27,64 +34,45 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
 import am.appwise.components.ni.NoInternetDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import life.nsu.foodware.R;
+import life.nsu.foodware.models.Location;
 import life.nsu.foodware.models.Restaurant;
+import life.nsu.foodware.utils.Constants;
 import life.nsu.foodware.utils.CustomLoadingDialog;
 import life.nsu.foodware.utils.GpsTracker;
-import life.nsu.foodware.utils.networking.ServerClient;
-import life.nsu.foodware.utils.networking.responses.MessageResponse;
-import life.nsu.foodware.utils.networking.responses.RestaurantResponse;
 import life.nsu.foodware.views.vendor.VendorHomeActivity;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class CreateVendorProfileActivity extends AppCompatActivity {
 
     CircleImageView mLogo;
 
-    EditText mRestaurantName;
-    EditText mOwnerName;
-    EditText mPhoneNumber;
-    EditText mBkash;
-    TextView mLocation;
+    private EditText mRestaurantName;
+    private EditText mOwnerName;
+    private EditText mPhoneNumber;
+    private EditText mBkash;
+    private TextView mLocation;
 
-    EditText mOpeningAt;
-    EditText mClosingAt;
+    private EditText mOpeningAt;
+    private EditText mClosingAt;
 
     Button mCreate;
 
-    SharedPreferences preferences;
-    SharedPreferences restaurantPreference;
-    GpsTracker gpsTracker;
-    NoInternetDialog noInternetDialog;
+    private GpsTracker gpsTracker;
     private CustomLoadingDialog loadingDialog;
 
-    String accessToken;
-    String location;
+    NoInternetDialog noInternetDialog;
+    Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_create_vendor_profile);
-
-        preferences = getApplication().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        restaurantPreference = getApplication().getApplicationContext().getSharedPreferences("restaurant", Context.MODE_PRIVATE);
-
-        accessToken = preferences.getString("accessToken", "null");
-        location = "null";
 
         mLogo = findViewById(R.id.img_logo);
         mRestaurantName = findViewById(R.id.et_restaurant_name);
@@ -103,12 +91,12 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         requestPermission();
 
         try {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
             } else {
                 getLocation();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             requestPermission();
 
@@ -116,12 +104,12 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
 
         mLogo.setOnClickListener(v -> {
             try {
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(CreateVendorProfileActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 101);
                 } else {
                     chooseImageFromGallery();
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 requestPermission();
 
@@ -129,12 +117,19 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         });
 
         mCreate.setOnClickListener(v -> {
-////            validation
-//            if(!isValidated()) {
-//                return;
-//            }
-//            createRestaurant();
-            route();
+
+            loadingDialog.show("");
+
+            new Handler(Looper.myLooper()).postDelayed(() -> {
+//            validation
+
+                if (!isValidated()) {
+                    return;
+                }
+
+                getUserDetails();
+            }, 100);
+
         });
 
 
@@ -142,18 +137,18 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
 
     private boolean isValidated() {
         return !mOwnerName.getText().toString().trim().isEmpty() && !mRestaurantName.getText().toString().trim().isEmpty() && !mPhoneNumber.getText().toString().trim().isEmpty() ||
-                !mBkash.getText().toString().trim().isEmpty() && !mOpeningAt.getText().toString().trim().isEmpty() && !mClosingAt.getText().toString().trim().isEmpty();
+                !mBkash.getText().toString().trim().isEmpty();
     }
 
-    public void getLocation(){
+    public void getLocation() {
         gpsTracker = new GpsTracker(this);
-        if(gpsTracker.canGetLocation()){
+
+        if (gpsTracker.canGetLocation()) {
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
 
-            location = latitude +", "+ longitude;
-            mLocation.setText(location);
-        }else{
+            mLocation.setText(latitude + ", " + longitude);
+        } else {
             gpsTracker.showSettingsAlert();
         }
     }
@@ -188,62 +183,77 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
 
     private void uploadLogo(Uri uri) {
         loadingDialog.show("");
-        File file = new File(uri.getPath());
-        RequestBody reqFile = RequestBody.create(MediaType.parse("image"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(), reqFile);
 
-        // call server to upload
-        Call<MessageResponse> call = ServerClient.getInstance().getRoute().uploadLogo(accessToken, body);
+        StorageReference logoReference = FirebaseStorage.getInstance().getReference(Constants.RESTAURANT_LOGO).child(FirebaseAuth.getInstance().getUid());
+        DatabaseReference vendorReference = FirebaseDatabase.getInstance().getReference(Constants.VENDOR_TABLE).child(FirebaseAuth.getInstance().getUid()).child(Constants.LOGO);
 
-        call.enqueue(new Callback<MessageResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<MessageResponse> call, @NotNull Response<MessageResponse> response) {
-                if(response.isSuccessful()) {
-                    if(response.body() != null) {
-                        Toast.makeText(CreateVendorProfileActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+        logoReference.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            // get url to put on firebase database
+            taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(task -> {
+                String logoLink = task.getResult().toString();
+
+                vendorReference.setValue(logoLink).addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+
+                        Restaurant restaurant = new Restaurant();
+                        restaurant.setLogo(logoLink);
+                        setSharedPreferences(restaurant);
+
                         mLogo.setAlpha((float) 1.0);
-
+                        loadingDialog.hide();
+                    } else {
+                        //
+                        loadingDialog.hide();
+                        Toast.makeText(this, "upload Failed!", Toast.LENGTH_SHORT).show();
                     }
-                }
+                });
 
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<MessageResponse> call, @NotNull Throwable t) {
-
-            }
+            });
         });
 
         loadingDialog.hide();
 
     }
 
-    private void createRestaurant() {
-        loadingDialog.show("");
+    private void getUserDetails() {
+        String name = mRestaurantName.getText().toString().trim();
+        String ownerName = mOwnerName.getText().toString().trim();
+        String phone = mPhoneNumber.getText().toString().trim();
+        String bkash = mBkash.getText().toString().trim();
+        String openingAt = mOpeningAt.getText().toString().trim();
+        String closingAt = mClosingAt.getText().toString().trim();
 
-        Restaurant restaurant = new Restaurant(mRestaurantName.getText().toString().trim(), mOwnerName.getText().toString().trim(),
-                            mPhoneNumber.getText().toString().trim(), mBkash.getText().toString().trim(), "open", location, mOpeningAt.getText().toString(), mClosingAt.getText().toString()) ;
+        if (openingAt == null) {
+            openingAt = "7:00";
+        }
 
-        Call<RestaurantResponse> call = ServerClient.getInstance().getRoute().createRestaurant(accessToken, restaurant);
+        if (closingAt == null) {
+            closingAt = "7:00";
+        }
 
-        call.enqueue(new Callback<RestaurantResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<RestaurantResponse> call, @NotNull Response<RestaurantResponse> response) {
-                if(response.isSuccessful()) {
-                    if(response.body() != null) {
-                        Restaurant restaurant = response.body().getRestaurant();
+        String timestamps = String.valueOf(System.currentTimeMillis());
+        location = new Location(gpsTracker.getLongitude(), gpsTracker.getLatitude(), timestamps);
 
-                        saveOnSharedPreference(restaurant);
+        Log.d("timestamps", timestamps);
+        Restaurant restaurant = new Restaurant(name, ownerName, phone, bkash, Constants.RESTAURANT_OFF, location, openingAt, closingAt);
+        createRestaurant(restaurant);
 
-                        route();
-                    }
-                }
-            }
+    }
 
-            @Override
-            public void onFailure(@NotNull Call<RestaurantResponse> call, @NotNull Throwable t) {
+    private void createRestaurant(Restaurant restaurant) {
+        DatabaseReference vendorReference = FirebaseDatabase.getInstance().getReference(Constants.VENDOR_TABLE).child(FirebaseAuth.getInstance().getUid());
+
+        vendorReference.setValue(restaurant).addOnCompleteListener(task2 -> {
+
+            if (task2.isSuccessful()) {
+                loadingDialog.hide();
+                setSharedPreferences(restaurant);
+                route();
+            } else {
+                Toast.makeText(this, "Failed to create Account", Toast.LENGTH_SHORT).show();
                 loadingDialog.hide();
             }
+
         });
 
     }
@@ -256,28 +266,13 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         getApplication().startActivity(intent);
     }
 
-    private void saveOnSharedPreference(Restaurant restaurant) {
-        SharedPreferences.Editor  editor= restaurantPreference.edit();
-
-        editor.putString("photo", restaurant.getName());
-        editor.putString("name", restaurant.getName());
-        editor.putString("ownerName", restaurant.getName());
-        editor.putString("phone", restaurant.getName());
-        editor.putString("bkash", restaurant.getName());
-        editor.putString("status", restaurant.getName());
-        editor.putString("location", restaurant.getName());
-
-        editor.apply();
-
-    }
-
     private void requestPermission() {
         Dexter.withContext(this)
                 .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        if(!multiplePermissionsReport.areAllPermissionsGranted()) {
+                        if (!multiplePermissionsReport.areAllPermissionsGranted()) {
                             showSettingsDialog();
                         }
 
@@ -288,7 +283,7 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
                         permissionToken.continuePermissionRequest();
                     }
                 })
-                .withErrorListener(dexterError -> Toast.makeText(CreateVendorProfileActivity.this, "Error occurred"+dexterError.toString(), Toast.LENGTH_SHORT).show())
+                .withErrorListener(dexterError -> Toast.makeText(CreateVendorProfileActivity.this, "Error occurred" + dexterError.toString(), Toast.LENGTH_SHORT).show())
                 .check();
     }
 
@@ -307,6 +302,44 @@ public class CreateVendorProfileActivity extends AppCompatActivity {
         builder.setCancelable(false);
         builder.show();
 
+    }
+
+    // set shared preference
+    public void setSharedPreferences(Restaurant restaurant) {
+        SharedPreferences.Editor editor = getSharedPreferences("restaurant", Context.MODE_PRIVATE).edit();
+
+        if(restaurant.getLogo() != null) {
+            editor.putString("logo", restaurant.getLogo());
+        }
+
+        if(restaurant.getName() != null) {
+            editor.putString("name", restaurant.getName());
+        }
+
+        if(restaurant.getOwnerName() != null) {
+            editor.putString("owner", restaurant.getOwnerName());
+        }
+
+        if(restaurant.getBkash() != null) {
+            editor.putString("bkash", restaurant.getBkash());
+        }
+
+        if(restaurant.getStatus() != null) {
+            editor.putString("status", restaurant.getStatus());
+        }
+
+        if(restaurant.getLocation() != null) {
+            editor.putString("latitude", String.valueOf(restaurant.getLocation().getLatitude()));
+            editor.putString("longitude", String.valueOf(restaurant.getLocation().getLongitude()));
+            editor.putString("timestamps", String.valueOf(restaurant.getLocation().getTimestamps()));
+        }
+
+        if(restaurant.getOpeningAt() != null) {
+            editor.putString("opening", restaurant.getOpeningAt());
+            editor.putString("closing", restaurant.getClosingAt());
+        }
+
+        editor.apply();
     }
 
 

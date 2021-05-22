@@ -24,10 +24,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 import life.nsu.foodware.R;
+import life.nsu.foodware.models.User;
+import life.nsu.foodware.utils.Constants;
 import life.nsu.foodware.utils.CustomLoadingDialog;
 
 import static android.content.ContentValues.TAG;
@@ -115,13 +116,13 @@ public class RegisterFragment extends Fragment {
 
             switch (checkedId) {
                 case R.id.rb_customer:
-                    type = "customer";
+                    type = Constants.CUSTOMER;
                     break;
                 case R.id.rb_vendor:
-                    type = "vendor";
+                    type = Constants.VENDOR;
                     break;
                 case R.id.rb_rider:
-                    type = "rider";
+                    type = Constants.RIDER;
                     break;
 
                 default:
@@ -140,15 +141,11 @@ public class RegisterFragment extends Fragment {
             if (task.isSuccessful()) {
                 // save to firebase database
                 mDatabase = FirebaseDatabase.getInstance();
-                mReference = mDatabase.getReference("users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
+                mReference = mDatabase.getReference(Constants.USER_TABLE).child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
 
-                HashMap<String, String> userMap = new HashMap<>();
-                userMap.put("email", email);
-                userMap.put("password", password);
-                userMap.put("type", type);
+                User user = new User(email, password, type);
 
-
-                mReference.setValue(userMap).addOnCompleteListener(task2 -> {
+                mReference.setValue(user).addOnCompleteListener(task2 -> {
                     if (task.isComplete()) {
                         route();
                     } else {
