@@ -1,6 +1,6 @@
 # FoodWare
 
-<img src="./documentation/logo.png" width=92 height=92/> &emsp; *Divided by Malware, united by FoodWare.*
+<img src="logo.png" width=92 height=92/> &emsp; *Divided by Malware, united by FoodWare.*
 
 
 ## Introduction
@@ -16,24 +16,24 @@ When you're ready to book your order, you'll see your shipping address, the appr
 ## Features
 ---
 #### JWT Token Based Authentication:<br>
-<img src="./documentation/splash.jpg"  width=270 height=480/>
-<img src="./documentation/signup.jpg"  width=270 height=480/>
-<img src="./documentation/login.jpg"  width=270 height=480/>
+<img src="splash.jpg"  width=270 height=480/>
+<img src="signup.jpg"  width=270 height=480/>
+<img src="login.jpg"  width=270 height=480/>
 
 ### Vendor 
 ### Collecting Permission on Runtime<br>
-<img src="./documentation/storage.jpg"  width=270 height=480/>
-<img src="./documentation/location.jpg"  width=270 height=480/>
+<img src="storage.jpg"  width=270 height=480/>
+<img src="location.jpg"  width=270 height=480/>
 
 ### Vendor UI
-<img src="./documentation/logo_upload.jpg"  width=270 height=480/>
-<img src="./documentation/create.jpg"  width=270 height=480/>
-<img src="./documentation/vendor_home.jpg"  width=270 height=480/>
-<img src="./documentation/add_item.jpg"  width=270 height=480/>
+<img src="logo_upload.jpg"  width=270 height=480/>
+<img src="create.jpg"  width=270 height=480/>
+<img src="vendor_home.jpg"  width=270 height=480/>
+<img src="add_item.jpg"  width=270 height=480/>
 
 ### Customer Feature
-<img src="./documentation/customer_home.jpg"  width=270 height=480/>
-<img src="./documentation/customer_more.jpg"  width=270 height=480/> <br>
+<img src="customer_home.jpg"  width=270 height=480/>
+<img src="customer_more.jpg"  width=270 height=480/> <br>
 
 ## Data management
 ---
@@ -44,7 +44,7 @@ I used `ORM` instead of raw query. ORM has protection againts `SQL injection` by
 To create routes, `express` is well known module for creating Backend application.  
 
 
-Datbase Design API documention can be found here : [API Documentation](https://github.com/NSU-FA20-CSE486-1/1712666_FA2020_CSE486.1/blob/main/Android%20Project/Server%20Code/README.md)
+Datbase Design API documention can be found here : [API Documentation](https://github.com/samiurprapon/foodware/blob/main/Server%20Code/README.md)
 
 ## Design Pattern
 ---
@@ -69,9 +69,17 @@ Application backend server is built with `Nodejs` and `express`. Server side is 
 
 ## Developer info
 ------
-```
-Author          :   Samiur Rahman Prapon,
-                    ID # 1712666642
 
-Submission Date :   22/01/2021
-```
+All Rights Reserved
+
+Copyright (c) 2021 Samiur Prapon
+
+Created by [Samiur Prapon](https://samiurprapon.github.io)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
