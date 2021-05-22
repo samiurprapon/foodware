@@ -59,7 +59,7 @@
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Dialog.Alert">
-    <item name="android:background">@color/gray_400</item>
-    <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/gray_400</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 </resources>
