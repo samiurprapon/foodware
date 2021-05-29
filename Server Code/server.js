@@ -1,7 +1,6 @@
 // import modules
 const express = require('express');
 const Sequelize = require('./models/index').Sequelize;
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require("multer");
 
@@ -32,8 +31,11 @@ const port = process.env.PORT || config.PORT;
 server.use('/public/uploads', express.static('public/uploads'));
 server.use(multer({ storage: storage }).single('photo'));
 
-server.use(bodyParser.urlencoded({extended: true}));
-server.use(bodyParser.json());
+server.use(express.json());
+server.use(express.urlencoded({
+  extended: true
+}));
+
 server.use(cors());
 
 // routing
